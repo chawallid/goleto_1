@@ -4,9 +4,19 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
+
 from dashborad import Ui_MainWindow as Ui_Dashborad
 from prepro import Ui_MainWindow as Ui_Prepro
 from SystemConfig import Ui_MainWindow as Ui_SystemConfig
+from calculateprogram.code_python import FirstDev,SecondDev,meancen2,snv,msc 
+file = ""
 
 class MyApp(QMainWindow):
     def __init__(self, parent=None):
@@ -42,14 +52,42 @@ class MyApp(QMainWindow):
         self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
         self.systemconfig.btn1.clicked.connect(self.getImage)
+        self.systemconfig.btnApply.clicked.connect(self.getWave)
+
     def getImage(self):
+        global file
         fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
         imagePath = fname[0]
-        file = imagePath.split("/")
+
+        file = fname[0]
+
+        file_tmp = imagePath.split("/")
+        self.systemconfig.label_1_.setText(file_tmp[len(file_tmp)-1])
+
+    def getWave(self):
+        global file
+        print(file)
+
+        X = pd.read_excel(file, sheet_name='X', header = None)
+        wl = pd.read_excel(file, sheet_name='wl', header = None)
+        wave = np.array(wl).reshape(-1)
+        x = np.array(X)
+        s =5
+        g= 5
+
+        FirstDev(wave,x,s,g)[0].show()
+        SecondDev(wave,x,s,g)[0].show()
+        meancen2(wave,x)[0].show()
+        snv(wave,x)[0].show()
+
+        # spmsc = msc(x)
+
+        # print(spmsc)
+
+        # spmsc,mscval = msc(x,nargout = 2)
+        # print(spmsc,mscval)
+
         
-        self.systemconfig.label_1_.setText(file[len(file)-1])
-    
-        # print(file[len(file)-1])
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myapp = MyApp()

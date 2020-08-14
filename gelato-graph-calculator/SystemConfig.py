@@ -8,13 +8,14 @@
 
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import (QWidget, QSlider, QLineEdit, QLabel, QPushButton, QScrollArea,QApplication,
+                             QHBoxLayout, QVBoxLayout, QMainWindow)
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from PyQt5.QtCore import Qt, QSize
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        # self.scroll = QScrollArea()            
+        self.scroll = QScrollArea()            
          
 
         MainWindow.setObjectName("MainWindow")
@@ -26,16 +27,29 @@ class Ui_MainWindow(object):
 "border:5px;\n"
 "")
         # self.widget = QWidget(MainWindow) 
+        # self.widget.setLayout(MainWindow)
 
+        # self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.scroll.setWidgetResizable(True)
+        # self.scroll.setWidget(MainWindow)
        
-        self.centralwidget = QWidget(MainWindow) 
+        self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setGeometry(QtCore.QRect(0, 0, 1800, 1200))
+        # self.centralwidget.setWidgetResizable(True)
         self.centralwidget.setObjectName("centralwidget")
+
+        
 
         self.btnBack = QtWidgets.QPushButton(self.centralwidget)
         self.btnBack.setGeometry(QtCore.QRect(10, 20, 111, 61))
         # self.btnBack.setFont(font)
         self.btnBack.setObjectName("btnBack")
+
+        self.btnApply = QtWidgets.QPushButton(self.centralwidget)
+        self.btnApply.setGeometry(QtCore.QRect(10, 60, 120, 80))
+        # self.btnBack.setFont(font)
+        self.btnApply.setObjectName("btnApply")
 
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(1000, 1000, 350, 100))
@@ -535,7 +549,7 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "M"))
         self.btnBack.setText(_translate("MainWindow", "Back"))
         self.btn1.setText(_translate("MainWindow", "browse"))
-
+        self.btnApply.setText(_translate("MainWindow", "Apply"))
 
 #        self.labelTime.setText(_translate("MainWindow", x.strftime("%c")))
 

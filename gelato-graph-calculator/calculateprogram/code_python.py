@@ -25,8 +25,8 @@ def FirstDev(wave=None,x=None,s=None,g=None):
     plt.xlabel('wavelenght, nm')
     plt.ylabel('Log 1/R')
     plt.xlim(np.min(wave),np.max(wave))
-    plt.show()
-    return sd1
+    # plt.show()
+    return plt,sd1
 
 
 # In[3]:
@@ -56,8 +56,8 @@ def SecondDev(wave,x,s,g,):
     plt.xlabel('wavelenght, nm')
     plt.ylabel('Log 1/R')
     plt.xlim(np.min(wave),np.max(wave))
-    plt.show()
-    return sd2
+    # plt.show()
+    return  plt,sd2
 
 
 # In[4]:
@@ -85,8 +85,8 @@ def meancen2(wave=None,x=None):
     plt.xlabel('wavelenght, nm')
     plt.ylabel('Log 1/R')
     plt.xlim(np.min(wave),np.max(wave))
-    plt.show()
-    return meanC
+    # plt.show()
+    return  plt,meanC
 
 
 # In[5]:
@@ -116,8 +116,8 @@ def snv(wave,x):
     plt.xlabel('wavelenght, nm')
     plt.ylabel('Log 1/R')
     plt.xlim(np.min(wave),np.max(wave))
-    plt.show()
-    return snv_data
+    # plt.show()
+    return  plt,snv_data
 
 
 # In[6]:
@@ -160,72 +160,4 @@ def msc(sp,nargout=1):
         spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
         return spmsc,mscval
 
-
-# In[7]:
-
-
-X = pd.read_excel('TEST_S5G5.xlsx', sheet_name='X', header = None)
-
-
-# In[8]:
-
-
-wl = pd.read_excel('TEST_S5G5.xlsx', sheet_name='wl', header = None)
-
-
-# In[9]:
-
-
-wave = np.array(wl).reshape(-1)
-
-
-# In[10]:
-
-
-x = np.array(X)
-
-
-# In[11]:
-
-
-s =5
-g= 5
-
-
-# In[12]:
-
-
-FirstDev(wave,x,s,g);
-
-
-# In[13]:
-
-
-SecondDev(wave,x,s,g);
-
-
-# In[14]:
-
-
-meancen2(wave,x);
-
-
-# In[15]:
-
-
-snv(wave,x);
-
-
-# In[16]:
-
-
-spmsc = msc(x)
-print(spmsc)
-
-
-# In[17]:
-
-
-spmsc,mscval = msc(x,nargout = 2)
-print(spmsc,mscval)
 

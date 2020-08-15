@@ -492,7 +492,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "System Configuration"))
+        # MainWindow.setWindowTitle(_translate("MainWindow", "System Configuration"))
         self.pushButton_4.setText(_translate("MainWindow", "APPLY"))
         self.pushButton_3.setText(_translate("MainWindow", "CANCEL"))
         #self.groupBox.setTitle(_translate("MainWindow", "Calculation Setting"))

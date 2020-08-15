@@ -4,10 +4,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
+from matplotlib.backends.backend_pdf import PdfPages
+
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+from fpdf import FPDF
 
 from matplotlib.figure import Figure
 # from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -20,7 +24,8 @@ from SystemConfig import Ui_MainWindow as Ui_SystemConfig
 from calculateprogram.code_python import FirstDev,SecondDev,meancen2,snv,msc 
 
 file = ""
-global wave,x,s,g 
+global wave,x,s,g,sd1,sd2,meanC,snv_data,mscval
+
 
 
 class MyApp(QMainWindow):
@@ -58,7 +63,7 @@ class MyApp(QMainWindow):
 
         self.systemconfig.btn1.clicked.connect(self.getImage)
         self.systemconfig.btnApply.clicked.connect(self.getWave)
-
+        self.prepro.btnApply.clicked.connect(self.getPDF)
     def getImage(self):
         global file
         fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
@@ -69,21 +74,117 @@ class MyApp(QMainWindow):
         file_tmp = imagePath.split("/")
         self.systemconfig.label_1_.setText(file_tmp[len(file_tmp)-1])
 
-    def getWave(self):
-        global file,wave,x,s,g 
-        print(file)
-        X = pd.read_excel(file, sheet_name='X', header = None)
-        wl = pd.read_excel(file, sheet_name='wl', header = None)
-        # print("pastmp")
-        wave = np.array(wl).reshape(-1)
-        x = np.array(X)
-        s =5
-        g= 5
+    def getPDF(self):
+        global wave,x,s,g,sd1,sd2,meanC,snv_data,mscval
 
-        self.FirstDev()
-        self.SecondDev()
-        self.meancen2()
-        self.snv()
+        # self.prepro.label_RAW.setText(_translate("MainWindow", "..."))
+        # self.prepro.label_SNV.setText(_translate("MainWindow", str(snv_data)))
+        # self.prepro.label_MSC.setText(_translate("MainWindow", str(mscval)))
+
+        print(self.prepro.comboBox.currentText())
+        print(self.prepro.comboBox_2.currentText())
+        print(self.prepro.comboBox_3.currentText())
+
+        arr = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
+        # self.dashborad.figure
+        # pp = PdfPages('foo.pdf')
+        # pp.savefig(plot1)
+        # pp.savefig(plot2)
+        # pp.savefig(plot3)
+        with PdfPages('exportPDF.pdf') as pdf:
+            # graph = 1 
+            for files in arr :
+                print(files)
+                if files == "RAW":
+                    # self.dashborad.figure.title("RAW")
+                    pdf.savefig(self.dashborad.figure)
+                    # self.dashborad.figure.close()
+                    print("Monday")
+                elif files == "SNV":
+                    # self.dashborad.figure1.title("SNV")
+                    pdf.savefig(self.dashborad.figure1)
+                    # self.dashborad.figure1.close()
+                    print("Tuesday")
+                elif files == "MSC":
+                    # self.dashborad.figure2.title("SNV")
+                    pdf.savefig(self.dashborad.figure2)
+                    # self.dashborad.figure2.close()
+                    print("Wednesday")
+                elif files == "1st Derivative":
+                    # self.dashborad.figure3.title("SNV")
+                    pdf.savefig(self.dashborad.figure3)
+                    # self.dashborad.figure3.close()
+                    print("Thursday")
+                elif files == "2nd Derivative":
+                    print("Friday")
+                else: 
+                    pdf.savefig()
+                
+                
+        
+
+    
+
+    def getWave(self):
+        global file,wave,x,s,g,sd1,sd2,meanC,snv_data,mscval
+        print(file)
+        if(file != ""):
+
+            X = pd.read_excel(file, sheet_name='X', header = None)
+            wl = pd.read_excel(file, sheet_name='wl', header = None)
+            wave = np.array(wl).reshape(-1)
+            x = np.array(X)
+            s =5
+            g= 5
+
+            self.FirstDev()
+            self.SecondDev()
+            self.meancen2()
+            self.snv()
+
+            sp = x
+            nos = x.shape[0]
+            wave = x.shape[1]
+            meansp=np.mean(sp,axis=0)
+            lbd=np.array(range(0,wave))
+            Ym=np.polyfit(lbd,meansp,1)
+            slopem=Ym[0]
+            interm=Ym[1]
+            Y=np.zeros([nos,2])
+            for i in range(0,nos):
+                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+            slope=np.tile(Y[:,0],(wave,1)).T
+            inter=np.tile(Y[:,1],(wave,1)).T
+            spmsc=(sp - inter) / slope
+            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+# //////////////////////////////////////////////
+            nos = x.shape[0]
+            wave = x.shape[1]
+            meansp=np.mean(sp,axis=0)
+            lbd=np.array(range(0,wave))
+            
+            Ym=np.polyfit(lbd,meansp,1)
+            mscval=np.copy(Ym)
+            slopem=Ym[0]
+            interm=Ym[1]
+            Y=np.zeros([nos,2])
+            for i in range(0,nos):
+                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+            slope=np.tile(Y[:,0],(wave,1)).T
+            inter=np.tile(Y[:,1],(wave,1)).T
+            spmsc=(sp - inter) / slope
+            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+
+            print("raw =",wl)
+            print("snv =",snv_data)
+            print("msc =",mscval[1])
+
+            self.prepro.label_RAW.setText("0")
+            self.prepro.label_SNV.setText("1")
+            self.prepro.label_MSC.setText(str(mscval[1]))
+            
+            self.systemconfig.centralwidget.hide()
+            self.dashborad.centralwidget.show()
         
 
         # spmsc = msc(x)
@@ -93,7 +194,7 @@ class MyApp(QMainWindow):
         # spmsc,mscval = msc(x,nargout = 2)
         # print(spmsc,mscval)
     def FirstDev(self):
-        global file,wave,x,s,g 
+        global file,wave,x,s,g,sd1
     
         xx = x.shape[0]
         xy = x.shape[1]
@@ -124,7 +225,7 @@ class MyApp(QMainWindow):
         print("draw succ1")
 
     def SecondDev(self):
-        global file,wave,x,s,g 
+        global file,wave,x,s,g,sd2
        
         xx = x.shape[0]
         xy = x.shape[1]
@@ -152,7 +253,7 @@ class MyApp(QMainWindow):
         print("draw succ2")
 
     def meancen2(self):
-        global file,wave,x,s,g 
+        global file,wave,x,s,g,meanC
 
         xx = x.shape[0]
         xy = x.shape[1]
@@ -181,7 +282,7 @@ class MyApp(QMainWindow):
         print("draw succ3")
 
     def snv(self):
-        global file,wave,x,s,g 
+        global file,wave,x,s,g,snv_data
 
         xx = x.shape[0]
         xy = x.shape[1]

@@ -23,30 +23,53 @@ class Ui_MainWindow(object):
         # self.btnBack.setFont(font)
         self.btnBack.setObjectName("btnBack")
 
+        self.btnApply = QtWidgets.QPushButton(self.centralwidget)
+        self.btnApply.setGeometry(QtCore.QRect(10, 60, 111, 61))
+        # self.btnBack.setFont(font)
+        self.btnApply.setObjectName("btnApply")
+
         self.widget.setObjectName("widget")
         self.widget_10 = QtWidgets.QWidget(self.widget)
         self.widget_10.setGeometry(QtCore.QRect(100, 100, 700, 80)) #WidgetRAW
         self.widget_10.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.widget_10.setObjectName("widget_10")
+
         self.label_12 = QtWidgets.QLabel(self.widget_10)
         self.label_12.setGeometry(QtCore.QRect(50, 30, 100, 20)) #LabelRAW
         self.label_12.setObjectName("label_12")
+
+        self.label_RAW = QtWidgets.QLabel(self.widget_10)
+        self.label_RAW.setGeometry(QtCore.QRect(150, 30, 100, 20)) #LabelRAW
+        self.label_RAW.setObjectName("label_RAW")
+
         self.widget_11 = QtWidgets.QWidget(self.widget)
         self.widget_11.setGeometry(QtCore.QRect(100, 200, 700, 80)) #WidgeSNV
         self.widget_11.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.widget_11.setObjectName("widget_11")
+
         self.label_13 = QtWidgets.QLabel(self.widget_11)
         self.label_13.setGeometry(QtCore.QRect(50, 30, 80, 30)) #LabelSNV
         self.label_13.setStyleSheet("align:\"center\"")
         self.label_13.setObjectName("label_13")
+
+        self.label_SNV = QtWidgets.QLabel(self.widget_11)
+        self.label_SNV.setGeometry(QtCore.QRect(150, 30, 80, 30)) #LabelSNV
+        self.label_SNV.setObjectName("label_SNV")
+
         self.widget_12 = QtWidgets.QWidget(self.widget)
         self.widget_12.setGeometry(QtCore.QRect(100, 300, 700, 80)) #WidgetMSC
         self.widget_12.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.widget_12.setObjectName("widget_12")
+
         self.label_14 = QtWidgets.QLabel(self.widget_12)
         self.label_14.setGeometry(QtCore.QRect(50, 30, 80, 30)) #LabelMSC
         self.label_14.setStyleSheet("align:\"center\"")
         self.label_14.setObjectName("label_14")
+
+        self.label_MSC = QtWidgets.QLabel(self.widget_12)
+        self.label_MSC.setGeometry(QtCore.QRect(150, 30, 80, 30)) #LabelSNV
+        self.label_MSC.setObjectName("label_MSC")
+
         self.widget_14 = QtWidgets.QWidget(self.widget)
         self.widget_14.setGeometry(QtCore.QRect(100, 570, 700, 100)) #2ndDeri
         self.widget_14.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -243,10 +266,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Pre-Processing"))
+        # MainWindow.setWindowTitle(_translate("MainWindow", "Pre-Processing"))
         self.label_12.setText(_translate("MainWindow", "RAW"))
+        self.label_RAW.setText(_translate("MainWindow", "..."))
         self.label_13.setText(_translate("MainWindow", "SNV"))
+        self.label_SNV.setText(_translate("MainWindow", "..."))
         self.label_14.setText(_translate("MainWindow", "MSC"))
+        self.label_MSC.setText(_translate("MainWindow", "..."))
         self.label_16.setText(_translate("MainWindow", "2nd Derivative"))
         self.label.setText(_translate("MainWindow", "Gab"))
         self.label_6.setText(_translate("MainWindow", "Segment"))
@@ -286,6 +312,8 @@ class Ui_MainWindow(object):
         self.pushButton_3.setText(_translate("MainWindow", "CANCEL"))
         self.pushButton_4.setText(_translate("MainWindow", "APPLY"))
         self.btnBack.setText(_translate("MainWindow", "Back"))
+        self.btnApply.setText(_translate("MainWindow", "Apply"))
+
 
 
 

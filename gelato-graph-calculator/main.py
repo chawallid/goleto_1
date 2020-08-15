@@ -167,14 +167,14 @@ class MyApp(QMainWindow):
             self.prepro.label_RAW.setText(str(sd1))
             self.prepro.label_SNV.setText(str(sd2))
             self.prepro.label_MSC.setText(str(meanC))
-
+            self.prepro.label_1stDeri.setText(str(snv_data))
             self.prepro.label_2ndDeri.setText(str(mscval[1]))
 
 
             self.dashborad.result1.setText(str(sd1))
             self.dashborad.result2.setText(str(sd2))
             self.dashborad.result3.setText(str(meanC))
-            self.dashborad.result4.setText("0")
+            self.dashborad.result4.setText(str(snv_data))
             self.dashborad.result5.setText(str(mscval[1]))
 
             self.systemconfig.centralwidget.hide()

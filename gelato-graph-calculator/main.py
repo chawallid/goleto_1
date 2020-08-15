@@ -82,26 +82,27 @@ class MyApp(QMainWindow):
             for files in arr :
                 print(files)
                 if files == "RAW":
-                    self.dashborad.figure.title("RAW")
+                    # self.dashborad.figure.title("RAW")
                     pdf.savefig(self.dashborad.figure)
 
                 elif files == "SNV":
-                    self.dashborad.figure1.title("SNV")
+                    # self.dashborad.figure1.title("SNV")
                     pdf.savefig(self.dashborad.figure1)
 
                 elif files == "MSC":
-                    self.dashborad.figure2.title("MSC")
+                    # self.dashborad.figure2.title("MSC")
                     pdf.savefig(self.dashborad.figure2)
 
                 elif files == "1st Derivative":
-                    self.dashborad.figure3.title("1st Derivative")
+                    # self.dashborad.figure3.title("1st Derivative")
                     pdf.savefig(self.dashborad.figure3)
 
                 elif files == "2nd Derivative":
                     print("2nd Derivative")
                 else: 
                     pdf.savefig()
-        # self.clickMethod()
+        self.prepro.centralwidget.hide()
+        self.dashborad.centralwidget.show()
                 
         
 

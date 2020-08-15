@@ -78,11 +78,16 @@ class Ui_MainWindow(object):
         self.widget_14.setGeometry(QtCore.QRect(100, 570, 700, 100)) #2ndDeri
         self.widget_14.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.widget_14.setObjectName("widget_14")
+
         self.label_16 = QtWidgets.QLabel(self.widget_14)
         self.label_16.setGeometry(QtCore.QRect(50, 30, 250, 30)) #2ndDeri
         self.label_16.setStyleSheet("align:\"center\"")
         self.label_16.setObjectName("label_16")
 
+        self.label_2ndDeri = QtWidgets.QLabel(self.widget_14)
+        self.label_2ndDeri.setGeometry(QtCore.QRect(150, 30, 250, 30)) #2ndDeri
+        self.label_2ndDeri.setStyleSheet("align:\"center\"")
+        self.label_2ndDeri.setObjectName("label_2ndDeri")
 
 
         self.spinBox = QtWidgets.QSpinBox(self.widget_14)
@@ -124,6 +129,7 @@ class Ui_MainWindow(object):
         self.label_7 = QtWidgets.QLabel(self.widget_15)
         self.label_7.setGeometry(QtCore.QRect(530, 10, 120, 30)) #SegSmoothL
         self.label_7.setObjectName("label_7")
+
         self.widget_18 = QtWidgets.QWidget(self.widget)
         self.widget_18.setGeometry(QtCore.QRect(100, 450, 700, 100)) #1stDeri
         self.widget_18.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -132,6 +138,11 @@ class Ui_MainWindow(object):
         self.label_19.setGeometry(QtCore.QRect(50, 25, 250, 50)) #1stDeri
         self.label_19.setStyleSheet("align:\"center\"")
         self.label_19.setObjectName("label_19")
+
+        self.label_1stDeri = QtWidgets.QLabel(self.widget_18)
+        self.label_1stDeri.setGeometry(QtCore.QRect(150, 25, 250, 50)) #1stDeri
+        self.label_1stDeri.setStyleSheet("align:\"center\"")
+        self.label_1stDeri.setObjectName("label_1stDeri")
 
         self.spinBox_7 = QtWidgets.QSpinBox(self.widget_18)
         self.spinBox_7.setGeometry(QtCore.QRect(385, 40, 80, 40)) #Gab1st
@@ -278,6 +289,8 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "MSC"))
         self.label_MSC.setText(_translate("MainWindow", "..."))
         self.label_16.setText(_translate("MainWindow", "2nd Derivative"))
+        self.label_2ndDeri.setText(_translate("MainWindow", "..."))
+        self.label_1stDeri.setText(_translate("MainWindow", "..."))
         self.label.setText(_translate("MainWindow", "Gab"))
         self.label_6.setText(_translate("MainWindow", "Segment"))
         self.label_17.setText(_translate("MainWindow", "Smoothing size"))

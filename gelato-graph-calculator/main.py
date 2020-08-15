@@ -161,13 +161,22 @@ class MyApp(QMainWindow):
             spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
 
             # print("raw =",wl)
-            # print("snv =",snv_data)
+            print("snv =",snv_data)
             # print("msc =",mscval[1])
+            sd1,sd2,meanC,snv_data,mscval
+            self.prepro.label_RAW.setText(str(sd1))
+            self.prepro.label_SNV.setText(str(sd2))
+            self.prepro.label_MSC.setText(str(meanC))
 
-            self.prepro.label_RAW.setText("0")
-            self.prepro.label_SNV.setText("1")
-            self.prepro.label_MSC.setText(str(mscval[1]))
-            
+            self.prepro.label_2ndDeri.setText(str(mscval[1]))
+
+
+            self.dashborad.result1.setText(str(sd1))
+            self.dashborad.result2.setText(str(sd2))
+            self.dashborad.result3.setText(str(meanC))
+            self.dashborad.result4.setText("0")
+            self.dashborad.result5.setText(str(mscval[1]))
+
             self.systemconfig.centralwidget.hide()
             self.dashborad.centralwidget.show()
         

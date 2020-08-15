@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+# from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 
 
 class Ui_MainWindow(object):
@@ -312,27 +312,27 @@ class Ui_MainWindow(object):
 "")
         self.tabWidget.setObjectName("tabWidget")
         
-        self.figure = plt.figure()
+        self.figure = plt.figure(1)
         self.canvas = FigureCanvas(self.figure)
 
-        # self.toolbar = NavigationToolbar(self.canvas, self)
+        self.figure1 = plt.figure(2)
+        self.canvas1 = FigureCanvas(self.figure1)
 
+        self.figure2 = plt.figure(3)
+        self.canvas2 = FigureCanvas(self.figure2)
+        
+        self.figure3 = plt.figure(4)
+        self.canvas3 = FigureCanvas(self.figure3)
 
-        # self.curves1 = QtWidgets.QWidget()
-        # self.curves1.setObjectName("curves1")
+        self.figure4 = plt.figure(5)
+        self.canvas4 = FigureCanvas(self.figure4)
+
         self.tabWidget.addTab(self.canvas, "")
-        self.curves2 = QtWidgets.QWidget()
-        self.curves2.setObjectName("curves2")
-        self.tabWidget.addTab(self.curves2, "")
-        self.curves3 = QtWidgets.QWidget()
-        self.curves3.setObjectName("curves3")
-        self.tabWidget.addTab(self.curves3, "")
-        self.curves4 = QtWidgets.QWidget()
-        self.curves4.setObjectName("curves4")
-        self.tabWidget.addTab(self.curves4, "")
-        self.curves5 = QtWidgets.QWidget()
-        self.curves5.setObjectName("curves5")
-        self.tabWidget.addTab(self.curves5, "")
+        self.tabWidget.addTab(self.canvas1, "")
+        self.tabWidget.addTab(self.canvas2, "")
+        self.tabWidget.addTab(self.canvas3, "")
+        self.tabWidget.addTab(self.canvas4, "")
+
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
         self.frame_2.setGeometry(QtCore.QRect(0, 0, 1291, 751))
         self.frame_2.setStyleSheet("background-color: rgb(211, 255, 229);")
@@ -383,7 +383,7 @@ class Ui_MainWindow(object):
         self.START.raise_()
         self.dateNtime.raise_()
         self.tabWidget.raise_()
-        # MainWindow.setCentralWidget(self.centralwidget)
+        MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 22))
         self.menubar.setObjectName("menubar")
@@ -456,10 +456,10 @@ class Ui_MainWindow(object):
         self.label_result1_5.setText(_translate("MainWindow", "Edit"))
         self.label_result1_6.setText(_translate("MainWindow", "Edit"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas), _translate("MainWindow", "Curves 1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.curves2), _translate("MainWindow", "Curves 2"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.curves3), _translate("MainWindow", "Curves 3"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.curves4), _translate("MainWindow", "Curves 4"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.curves5), _translate("MainWindow", "Curves 5"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas1), _translate("MainWindow", "Curves 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas2), _translate("MainWindow", "Curves 3"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas3), _translate("MainWindow", "Curves 4"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas4), _translate("MainWindow", "Curves 5"))
         self.buttonSysConfig.setText(_translate("MainWindow", "System Config"))
         self.buttonPrePro.setText(_translate("MainWindow", "Pre-Processing"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))

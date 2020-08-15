@@ -1,3 +1,4 @@
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -25,8 +26,8 @@ def FirstDev(wave=None,x=None,s=None,g=None):
     plt.xlabel('wavelenght, nm')
     plt.ylabel('Log 1/R')
     plt.xlim(np.min(wave),np.max(wave))
-    # plt.show()
-    return plt,sd1
+    plt.show() 
+    return sd1
 
 
 # In[3]:

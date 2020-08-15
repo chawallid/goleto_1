@@ -312,19 +312,19 @@ class Ui_MainWindow(object):
 "")
         self.tabWidget.setObjectName("tabWidget")
         
-        self.figure = plt.figure(1)
+        self.figure = plt.figure(figsize=(10,3))
         self.canvas = FigureCanvas(self.figure)
 
-        self.figure1 = plt.figure(2)
+        self.figure1 = plt.figure(figsize=(10,3))
         self.canvas1 = FigureCanvas(self.figure1)
 
-        self.figure2 = plt.figure(3)
+        self.figure2 = plt.figure(figsize=(10,3))
         self.canvas2 = FigureCanvas(self.figure2)
         
-        self.figure3 = plt.figure(4)
+        self.figure3 = plt.figure(figsize=(10,3))
         self.canvas3 = FigureCanvas(self.figure3)
 
-        self.figure4 = plt.figure(5)
+        self.figure4 = plt.figure(figsize=(10,3))
         self.canvas4 = FigureCanvas(self.figure4)
 
         self.tabWidget.addTab(self.canvas, "")

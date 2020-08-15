@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -6,11 +7,14 @@ class Ui_MainWindow(object):
         MainWindow.resize(1800, 1200)
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border:5px;\n"
-"")
+"")     
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setGeometry(QtCore.QRect(0, 0, 1800, 1200))
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
+
+        # self.error_dialog = QtWidgets.QErrorMessage(self.centralwidget)
+
         self.widget.setGeometry(QtCore.QRect(30, 40, 900, 900)) #snv...
         self.widget.setStyleSheet("  border-radius: 5px;\n"
 "  border: 0px solid;\n"

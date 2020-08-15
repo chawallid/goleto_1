@@ -14,8 +14,6 @@ import pandas as pd
 from fpdf import FPDF
 
 from matplotlib.figure import Figure
-# from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-# from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from dashborad import Ui_MainWindow as Ui_Dashborad
@@ -76,54 +74,40 @@ class MyApp(QMainWindow):
 
     def getPDF(self):
         global wave,x,s,g,sd1,sd2,meanC,snv_data,mscval
-
-        # self.prepro.label_RAW.setText(_translate("MainWindow", "..."))
-        # self.prepro.label_SNV.setText(_translate("MainWindow", str(snv_data)))
-        # self.prepro.label_MSC.setText(_translate("MainWindow", str(mscval)))
-
         print(self.prepro.comboBox.currentText())
         print(self.prepro.comboBox_2.currentText())
         print(self.prepro.comboBox_3.currentText())
-
         arr = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
-        # self.dashborad.figure
-        # pp = PdfPages('foo.pdf')
-        # pp.savefig(plot1)
-        # pp.savefig(plot2)
-        # pp.savefig(plot3)
         with PdfPages('exportPDF.pdf') as pdf:
-            # graph = 1 
             for files in arr :
                 print(files)
                 if files == "RAW":
-                    # self.dashborad.figure.title("RAW")
+                    self.dashborad.figure.title("RAW")
                     pdf.savefig(self.dashborad.figure)
-                    # self.dashborad.figure.close()
-                    print("Monday")
+
                 elif files == "SNV":
-                    # self.dashborad.figure1.title("SNV")
+                    self.dashborad.figure1.title("SNV")
                     pdf.savefig(self.dashborad.figure1)
-                    # self.dashborad.figure1.close()
-                    print("Tuesday")
+
                 elif files == "MSC":
-                    # self.dashborad.figure2.title("SNV")
+                    self.dashborad.figure2.title("MSC")
                     pdf.savefig(self.dashborad.figure2)
-                    # self.dashborad.figure2.close()
-                    print("Wednesday")
+
                 elif files == "1st Derivative":
-                    # self.dashborad.figure3.title("SNV")
+                    self.dashborad.figure3.title("1st Derivative")
                     pdf.savefig(self.dashborad.figure3)
-                    # self.dashborad.figure3.close()
-                    print("Thursday")
+
                 elif files == "2nd Derivative":
-                    print("Friday")
+                    print("2nd Derivative")
                 else: 
                     pdf.savefig()
-                
+        # self.clickMethod()
                 
         
 
     
+    def clickMethod(self):
+        QMessageBox.about(self, "Title", "Message")
 
     def getWave(self):
         global file,wave,x,s,g,sd1,sd2,meanC,snv_data,mscval
@@ -175,9 +159,9 @@ class MyApp(QMainWindow):
             spmsc=(sp - inter) / slope
             spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
 
-            print("raw =",wl)
-            print("snv =",snv_data)
-            print("msc =",mscval[1])
+            # print("raw =",wl)
+            # print("snv =",snv_data)
+            # print("msc =",mscval[1])
 
             self.prepro.label_RAW.setText("0")
             self.prepro.label_SNV.setText("1")

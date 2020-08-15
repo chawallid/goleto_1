@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.btnBack.setObjectName("btnBack")
 
         self.btnApply = QtWidgets.QPushButton(self.centralwidget)
-        self.btnApply.setGeometry(QtCore.QRect(10, 60, 120, 80))
+        self.btnApply.setGeometry(QtCore.QRect(10, 60, 111, 61))
         # self.btnBack.setFont(font)
         self.btnApply.setObjectName("btnApply")
 

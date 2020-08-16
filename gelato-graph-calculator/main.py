@@ -604,8 +604,8 @@ class MyApp(QMainWindow):
                     print("other")
 
             print("x_2 shape :" , x_2.shape)
-            print("bias :" , int(self.systemconfig.spinBox_4.value()))
-            result = (result.dot(x_2)) + int(self.systemconfig.spinBox_4.value())
+            print("bias :" , int(self.systemconfig.spinBox_5.value()))
+            result = (result.dot(x_2)) + int(self.systemconfig.spinBox_5.value())
             print("result shape :", result.shape)              
             print("result :", result)
             result2 = result
@@ -700,8 +700,8 @@ class MyApp(QMainWindow):
                     print("other")
 
             print("x_3 shape :" , x_3.shape)
-            print("bias :" , int(self.systemconfig.spinBox_4.value()))
-            result = (result.dot(x_3)) + int(self.systemconfig.spinBox_4.value())
+            print("bias :" , int(self.systemconfig.spinBox_6.value()))
+            result = (result.dot(x_3)) + int(self.systemconfig.spinBox_6.value())
             print("result shape :", result.shape)              
             print("result :", result)
             result3 = result
@@ -797,8 +797,8 @@ class MyApp(QMainWindow):
                     print("other")
 
             print("x_4 shape :" , x_4.shape)
-            print("bias :" , int(self.systemconfig.spinBox_4.value()))
-            result = (result.dot(x_4)) + int(self.systemconfig.spinBox_4.value())
+            print("bias :" , int(self.systemconfig.spinBox_7.value()))
+            result = (result.dot(x_4)) + int(self.systemconfig.spinBox_7.value())
             print("result shape :", result.shape)              
             print("result :", result)
             result4 = result
@@ -891,9 +891,9 @@ class MyApp(QMainWindow):
                 else: 
                     print("other")
 
-            print("x_4 shape :" , x_5.shape)
-            print("bias :" , int(self.systemconfig.spinBox_4.value()))
-            result = (result.dot(x_5)) + int(self.systemconfig.spinBox_4.value())
+            print("x_5 shape :" , x_5.shape)
+            print("bias :" , int(self.systemconfig.spinBox_8.value()))
+            result = (result.dot(x_5)) + int(self.systemconfig.spinBox_8.value())
             print("result shape :", result.shape)              
             print("result :", result)
             result5 = result

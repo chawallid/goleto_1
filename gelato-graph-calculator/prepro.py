@@ -22,15 +22,15 @@ class Ui_MainWindow(object):
 "font-size: 10pt;\n"
 "\n"
 "")
-        self.btnBack = QtWidgets.QPushButton(self.centralwidget)
-        self.btnBack.setGeometry(QtCore.QRect(10, 20, 111, 61))
-        # self.btnBack.setFont(font)
-        self.btnBack.setObjectName("btnBack")
+        # self.btnBack = QtWidgets.QPushButton(self.centralwidget)
+        # self.btnBack.setGeometry(QtCore.QRect(10, 20, 111, 61))
+        # # self.btnBack.setFont(font)
+        # self.btnBack.setObjectName("btnBack")
 
-        self.btnApply = QtWidgets.QPushButton(self.centralwidget)
-        self.btnApply.setGeometry(QtCore.QRect(10, 60, 111, 61))
-        # self.btnBack.setFont(font)
-        self.btnApply.setObjectName("btnApply")
+        # self.btnApply = QtWidgets.QPushButton(self.centralwidget)
+        # self.btnApply.setGeometry(QtCore.QRect(10, 60, 111, 61))
+        # # self.btnBack.setFont(font)
+        # self.btnApply.setObjectName("btnApply")
 
         self.widget.setObjectName("widget")
         self.widget_10 = QtWidgets.QWidget(self.widget)
@@ -333,17 +333,17 @@ class Ui_MainWindow(object):
         self.lineEdit.setText(_translate("MainWindow", "Type your name..."))
         self.pushButton_3.setText(_translate("MainWindow", "CANCEL"))
         self.pushButton_4.setText(_translate("MainWindow", "APPLY"))
-        self.btnBack.setText(_translate("MainWindow", "Back"))
-        self.btnApply.setText(_translate("MainWindow", "Apply"))
+        # self.btnBack.setText(_translate("MainWindow", "Back"))
+        # self.btnApply.setText(_translate("MainWindow", "Apply"))
 
 
 
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     MainWindow = QtWidgets.QMainWindow()
-#     ui = Ui_MainWindow()
-#     ui.setupUi(MainWindow)
-#     MainWindow.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

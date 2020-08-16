@@ -255,11 +255,11 @@ class MyApp(QMainWindow):
         self.dashborad.buttonPrePro.clicked.connect(self.prepro.centralwidget.show)
         self.dashborad.buttonPrePro.clicked.connect(self.dashborad.centralwidget.hide)
 
-        self.prepro.btnBack.clicked.connect(self.prepro.centralwidget.hide)
-        self.prepro.btnBack.clicked.connect(self.dashborad.centralwidget.show)
+        self.prepro.pushButton_3.clicked.connect(self.prepro.centralwidget.hide)
+        self.prepro.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
         
-        self.systemconfig.btnBack.clicked.connect(self.systemconfig.centralwidget.hide)
-        self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
+        self.systemconfig.pushButton_3.clicked.connect(self.systemconfig.centralwidget.hide)
+        self.systemconfig.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
 
         self.systemconfig.btn1.clicked.connect(self.getbtn1)
         self.systemconfig.btn2.clicked.connect(self.getbtn2)
@@ -268,9 +268,9 @@ class MyApp(QMainWindow):
         self.systemconfig.btn5.clicked.connect(self.getbtn5)
 
         self.dashborad.START.clicked.connect(self.getWave)
-        self.systemconfig.btnApply.clicked.connect(self.getApply)
+        self.systemconfig.pushButton_4.clicked.connect(self.getApply)
 
-        self.prepro.btnApply.clicked.connect(self.getPrepair)
+        self.prepro.pushButton_4.clicked.connect(self.getPrepair)
 
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)

@@ -613,14 +613,14 @@ class Ui_MainWindow(object):
         self.groupBox_wav.setText(_translate("MainWindow", "Wave Length"))
         self.label_13.setText(_translate("MainWindow", "N"))
         self.label_14.setText(_translate("MainWindow", "M"))
-        self.btnBack.setText(_translate("MainWindow", "Back"))
+        # self.btnBack.setText(_translate("MainWindow", "Back"))
         self.btn1.setText(_translate("MainWindow", "browse"))
         self.btn2.setText(_translate("MainWindow", "browse"))
         self.btn3.setText(_translate("MainWindow", "browse"))
         self.btn4.setText(_translate("MainWindow", "browse"))
         self.btn5.setText(_translate("MainWindow", "browse"))
 
-        self.btnApply.setText(_translate("MainWindow", "Apply"))
+        # self.btnApply.setText(_translate("MainWindow", "Apply"))
 
 #        self.labelTime.setText(_translate("MainWindow", x.strftime("%c")))
 

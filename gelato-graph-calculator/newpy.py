@@ -1,74 +1,34 @@
-import sys
-
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget, QPushButton
-from PyQt5.QtGui import QIcon
-
-import matplotlib
-import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+from datetime import datetime
+import time
 
-import random
-from calculateprogram.code_python import FirstDev,SecondDev,meancen2,snv,msc 
+x_coordinates = []
+list_tmp = []
+value = []
 
-class App(QMainWindow):
+for j in range(10):
+    list_tmp.append([0])
+print(list_tmp)
 
-    def __init__(self):
-        super().__init__()
-        self.left = 10
-        self.top = 10
-        self.title = 'PyQt5 matplotlib example - pythonspot.com'
-        self.width = 640
-        self.height = 400
-        self.initUI()
-
-    def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-
-        m = PlotCanvas(self, width=5, height=4)
-        m.move(0,0)
-
-        button = QPushButton('PyQt5 button', self)
-        button.setToolTip('This s an example button')
-        button.move(500,0)
-        button.resize(140,100)
-
-        self.show()
+for j in range(10):
+    value.append(np.random.random())
+print(value)
+x = 0
 
 
-class PlotCanvas(FigureCanvas):
+for f in range(100): 
+    x_coordinates.append(x)
+    for j in range(1):  
+        value[j]  =  np.random.random()
+        if (x == 0 ):
+            list_tmp[j] = [value[j]]
+        else:
+            list_tmp[j].append(value[j])
+        print(x_coordinates , list_tmp[j])
+        plt.plot(x_coordinates, list_tmp[j])
+    x += 1
+    plt.show()
+# plot second line
 
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
-
-        FigureCanvas.__init__(self, fig)
-        self.setParent(parent)
-
-        FigureCanvas.setSizePolicy(self,
-                QSizePolicy.Expanding,
-                QSizePolicy.Expanding)
-        FigureCanvas.updateGeometry(self)
-        self.plot()
-
-
-    def plot(self):
-
-        X = pd.read_excel('TEST_S5G5.xlsx', sheet_name='X', header = None)
-        wl = pd.read_excel('TEST_S5G5.xlsx', sheet_name='wl', header = None)
-        wave = np.array(wl).reshape(-1)
-        x = np.array(X)
-        s =5
-        g= 5
-        self.figure = FirstDev(wave,x,s,g)
-        self.draw()
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
-    sys.exit(app.exec_())
+# SAMPLE.JPG

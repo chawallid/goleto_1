@@ -252,14 +252,15 @@ class Ui_MainWindow(object):
         self.label_4.setGeometry(QtCore.QRect(100, 50, 300, 40)) #username
         self.label_4.setStyleSheet("font: 14pt \"Tahoma\";")
         self.label_4.setObjectName("label_4")
+        
         self.widget_8 = QtWidgets.QWidget(self.widget_3)
         self.widget_8.setGeometry(QtCore.QRect(100, 100, 600, 80))
         self.widget_8.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 32pt \"Tahoma\";")
         self.widget_8.setObjectName("widget_8")
-        self.lineEdit = QtWidgets.QLineEdit(self.widget_8)
-        self.lineEdit.setGeometry(QtCore.QRect(200, 100, 250, 100)) #boxToTypeUsername
-        self.lineEdit.setObjectName("lineEdit")
+
+       
+
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(500, 1000, 350, 100))
         self.pushButton_3.setStyleSheet("border-radius:50px;\n"
@@ -275,6 +276,10 @@ class Ui_MainWindow(object):
 "color:#fff;")
         self.pushButton_4.setObjectName("pushButton_4")
         # MainWindow.setCentralWidget(self.centralwidget)
+
+        self.lineEdit = QtWidgets.QLineEdit(self.widget_8)
+        self.lineEdit.setGeometry(QtCore.QRect(200, 100, 250, 100)) #boxToTypeUsername
+        self.lineEdit.setObjectName("lineEdit")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

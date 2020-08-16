@@ -78,30 +78,32 @@ def meancen2(wave=None,x=None):
     plt.xlim(np.min(wave),np.max(wave))
     # plt.show()
     return  plt,meanC
+
 def snv(wave,x):
     xx = x.shape[0]
     xy = x.shape[1]
+
     mean_x=np.mean(x,axis =1)
     std_d=np.std(x,axis=1)
     meand=np.tile(mean_x,(xy,1)).T
     stdd=np.tile(std_d,(xy,1)).T
     
-    snv_data= (x - meand) / stdd
+    snv_data = (x - meand) / stdd
     
-    plt.figure(figsize=(10,3))
-    plt.subplot(121)
-    for i in range (x.shape[0]):  
-        plt.plot(wave,x[i])
-    plt.xlabel('wavelenght, nm')
-    plt.ylabel('log 1/R')
-    plt.xlim(np.min(wave),np.max(wave))
+    # plt.figure(figsize=(10,3))
+    # plt.subplot(121)
+    # for i in range (x.shape[0]):  
+    #     plt.plot(wave,x[i])
+    # plt.xlabel('wavelenght, nm')
+    # plt.ylabel('log 1/R')
+    # plt.xlim(np.min(wave),np.max(wave))
     
-    plt.subplot(122)
-    for i in range (x.shape[0]):  
-        plt.plot(wave,snv_data[i])
-    plt.xlabel('wavelenght, nm')
-    plt.ylabel('Log 1/R')
-    plt.xlim(np.min(wave),np.max(wave))
+    # plt.subplot(122)
+    # for i in range (x.shape[0]):  
+    #     plt.plot(wave,snv_data[i])
+    # plt.xlabel('wavelenght, nm')
+    # plt.ylabel('Log 1/R')
+    # plt.xlim(np.min(wave),np.max(wave))
     # plt.show()
     return  plt,snv_data
 def msc(sp,nargout=1):

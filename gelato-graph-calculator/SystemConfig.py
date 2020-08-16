@@ -112,7 +112,9 @@ class Ui_MainWindow(object):
         self.spinBox_4 = QtWidgets.QSpinBox(self.widget_12)
         self.spinBox_4.setGeometry(QtCore.QRect(40, 20, 31, 22)) #biasL1
         self.spinBox_4.setObjectName("spinBox_4")
+        
         self.widget_13 = QtWidgets.QWidget(self.widget_4)
+
         self.widget_13.setGeometry(QtCore.QRect(450, 60, 270, 50)) #selectW1
         self.widget_13.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 0px;")

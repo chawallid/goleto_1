@@ -78,7 +78,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setProperty("Color", QtGui.QColor(0, 0, 0))
         self.frame.setObjectName("frame")
-        self.result1 = QtWidgets.QLabel(self.frame)
+        self.result1 = QtWidgets.QLineEdit(self.frame)
         self.result1.setGeometry(QtCore.QRect(20, 110, 211, 111))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         self.result1.setAlignment(QtCore.Qt.AlignCenter)
         self.result1.setObjectName("result1")
         
-        self.result2 = QtWidgets.QLabel(self.frame)
+        self.result2 = QtWidgets.QLineEdit(self.frame)
         self.result2.setGeometry(QtCore.QRect(270, 110, 211, 111))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -103,6 +103,7 @@ class Ui_MainWindow(object):
         self.result2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: 0px solid grey;\n"
 "border-radius: 20px;")
+
         self.result2.setAlignment(QtCore.Qt.AlignCenter)
         self.result2.setObjectName("result2")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.frame)
@@ -111,7 +112,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.result4 = QtWidgets.QLabel(self.frame)
+        self.result4 = QtWidgets.QLineEdit(self.frame)
         self.result4.setGeometry(QtCore.QRect(790, 110, 211, 111))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -124,7 +125,7 @@ class Ui_MainWindow(object):
 "border-radius: 20px;")
         self.result4.setAlignment(QtCore.Qt.AlignCenter)
         self.result4.setObjectName("result4")
-        self.result5 = QtWidgets.QLabel(self.frame)
+        self.result5 = QtWidgets.QLineEdit(self.frame)
         self.result5.setGeometry(QtCore.QRect(1050, 110, 211, 111))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -137,7 +138,7 @@ class Ui_MainWindow(object):
 "border-radius: 20px;")
         self.result5.setAlignment(QtCore.Qt.AlignCenter)
         self.result5.setObjectName("result5")
-        self.result3 = QtWidgets.QLabel(self.frame)
+        self.result3 = QtWidgets.QLineEdit(self.frame)
         self.result3.setGeometry(QtCore.QRect(530, 110, 211, 111))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -402,16 +403,22 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
         self.actionSave_Files = QtWidgets.QAction(MainWindow)
         self.actionSave_Files.setObjectName("actionSave_Files")
+
         self.actionSave_As = QtWidgets.QAction(MainWindow)
         self.actionSave_As.setObjectName("actionSave_As")
+
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
+
         self.actionStart = QtWidgets.QAction(MainWindow)
         self.actionStart.setObjectName("actionStart")
+
         self.actionStop = QtWidgets.QAction(MainWindow)
         self.actionStop.setObjectName("actionStop")
+
         self.menuFile.addAction(self.actionSave_Files)
         self.menuFile.addAction(self.actionSave_As)
         self.menuFile.addAction(self.actionExit)
@@ -426,11 +433,11 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         self.EXIT.clicked.connect(MainWindow.close)
-        self.START.clicked.connect(self.result5.update)
-        self.START.clicked.connect(self.result4.update)
-        self.START.clicked.connect(self.result3.update)
-        self.START.clicked.connect(self.result2.update)
-        self.START.clicked.connect(self.result1.update)
+        # self.START.clicked.connect(self.result5.update)
+        # self.START.clicked.connect(self.result4.update)
+        # self.START.clicked.connect(self.result3.update)
+        # self.START.clicked.connect(self.result2.update)
+        # self.START.clicked.connect(self.result1.update)
 
         self.label_result1_2.objectNameChanged['QString'].connect(self.label_result1.setText)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -440,7 +447,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.EXIT.setText(_translate("MainWindow", "EXIT"))
         self.START.setText(_translate("MainWindow", "START"))
-        self.dateNtime.setText(_translate("MainWindow", "<font color=\"white\">DD MMM | HH : MM AM/PM</font>"))
+        self.dateNtime.setText(_translate("MainWindow", "<font color=\"balck\">DD MMM | HH : MM AM/PM</font>"))
         self.result1.setText(_translate("MainWindow", "0"))
         self.result2.setText(_translate("MainWindow", "0"))
         self.result4.setText(_translate("MainWindow", "0"))

@@ -156,21 +156,40 @@ class Ui_MainWindow(object):
         self.widget_16.setStyleSheet("background-color: rgb(236, 236,236);\n"
 "border-radius:15px 50px 30px 5px;")
         self.widget_16.setObjectName("widget_16")
+
         self.widget_7 = QtWidgets.QWidget(self.groupBox)
         self.widget_7.setGeometry(QtCore.QRect(80, 250, 750, 120)) #result2W
         self.widget_7.setStyleSheet("background-color:rgb(158, 158, 158);\n"
 "border: none")
         self.widget_7.setObjectName("widget_7")
+
+
+
         self.label_6 = QtWidgets.QLabel(self.widget_7)
         self.label_6.setGeometry(QtCore.QRect(350, 5, 120, 25)) #result2L
         self.label_6.setStyleSheet("align:\"center\";\n" "font-size:10pt;\n" "color:#fff")
         self.label_6.setObjectName("label_6")
+
+        
+
         self.widget_8 = QtWidgets.QWidget(self.widget_7)
         self.widget_8.setGeometry(QtCore.QRect(30, 60, 300, 50)) #caliW2
         self.widget_8.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 0px;")
         self.widget_8.setObjectName("widget_8")
+        
+        self.label_2_ = QtWidgets.QLabel(self.widget_7)
+        self.label_2_.setGeometry(QtCore.QRect(30, 60, 300, 50)) #browse file2
+        self.label_2_.setStyleSheet("background-color: rgb(255, 255, 255);\n""align:\"center\";\n" "font-size:10pt;\n" "color:#000;")
+        self.label_2_.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2_.setObjectName("label_2_")
+
+        self.btn2 = QtWidgets.QPushButton(self.widget_7)
+        self.btn2.setGeometry(QtCore.QRect(35+230, 70 , 45+10, 35))
+        self.btn2.setObjectName("btn2")
+
         self.widget_17 = QtWidgets.QWidget(self.widget_7)
+
         self.widget_17.setGeometry(QtCore.QRect(340, 60, 100, 50)) #biasW2
         self.widget_17.setStyleSheet("border-radius: 0px;\n"
 "background-color: rgb(255, 255, 255);")
@@ -228,11 +247,23 @@ class Ui_MainWindow(object):
         self.label_7.setGeometry(QtCore.QRect(350, 5, 120, 25))  #result3L
         self.label_7.setStyleSheet("align:\"center\";\n" "font-size:10pt;\n" "color:#fff")
         self.label_7.setObjectName("label_7")
+
         self.widget_22 = QtWidgets.QWidget(self.widget_9)
         self.widget_22.setGeometry(QtCore.QRect(30, 60, 300, 50)) #caliW3
         self.widget_22.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 0px;")
         self.widget_22.setObjectName("widget_22")
+
+        self.label_3_ = QtWidgets.QLabel(self.widget_9)
+        self.label_3_.setGeometry(QtCore.QRect(30, 60, 300, 50)) #browse file2
+        self.label_3_.setStyleSheet("background-color: rgb(255, 255, 255);\n""align:\"center\";\n" "font-size:10pt;\n" "color:#000;")
+        self.label_3_.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3_.setObjectName("label_3_")
+
+        self.btn3 = QtWidgets.QPushButton(self.widget_9)
+        self.btn3.setGeometry(QtCore.QRect(35+230, 70 , 45+10, 35))
+        self.btn3.setObjectName("btn3")
+
         self.widget_23 = QtWidgets.QWidget(self.widget_9)
         self.widget_23.setGeometry(QtCore.QRect(340, 60, 100, 50)) #biasW3
         self.widget_23.setStyleSheet("border-radius: 0px;\n"
@@ -292,10 +323,22 @@ class Ui_MainWindow(object):
         self.label_8.setStyleSheet("align:\"center\";\n" "font-size:10pt;\n" "color:#fff")
         self.label_8.setObjectName("label_8")
         self.widget_29 = QtWidgets.QWidget(self.widget_28)
+
         self.widget_29.setGeometry(QtCore.QRect(30, 60, 300, 50)) #caliW4
         self.widget_29.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 0px;")
         self.widget_29.setObjectName("widget_29")
+
+        self.label_4_ = QtWidgets.QLabel(self.widget_28)
+        self.label_4_.setGeometry(QtCore.QRect(30, 60, 300, 50)) #browse file2
+        self.label_4_.setStyleSheet("background-color: rgb(255, 255, 255);\n""align:\"center\";\n" "font-size:10pt;\n" "color:#000;")
+        self.label_4_.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4_.setObjectName("label_4_")
+
+        self.btn4 = QtWidgets.QPushButton(self.widget_28)
+        self.btn4.setGeometry(QtCore.QRect(35+230, 70 , 45+10, 35))
+        self.btn4.setObjectName("btn4")
+
         self.widget_30 = QtWidgets.QWidget(self.widget_28)
         self.widget_30.setGeometry(QtCore.QRect(340, 60, 100, 50)) #biasW4
         self.widget_30.setStyleSheet("border-radius: 0px;\n"
@@ -359,6 +402,17 @@ class Ui_MainWindow(object):
         self.widget_36.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 0px;")
         self.widget_36.setObjectName("widget_36")
+
+        self.label_5_ = QtWidgets.QLabel(self.widget_35)
+        self.label_5_.setGeometry(QtCore.QRect(30, 60, 300, 50)) #browse file2
+        self.label_5_.setStyleSheet("background-color: rgb(255, 255, 255);\n""align:\"center\";\n" "font-size:10pt;\n" "color:#000;")
+        self.label_5_.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5_.setObjectName("label_5_")
+
+        self.btn5 = QtWidgets.QPushButton(self.widget_35)
+        self.btn5.setGeometry(QtCore.QRect(35+230, 70 , 45+10, 35))
+        self.btn5.setObjectName("btn5")
+
         self.widget_37 = QtWidgets.QWidget(self.widget_35)
         self.widget_37.setGeometry(QtCore.QRect(340, 60, 100, 50)) #biasW5
         self.widget_37.setStyleSheet("border-radius: 0px;\n"
@@ -495,48 +549,58 @@ class Ui_MainWindow(object):
         # MainWindow.setWindowTitle(_translate("MainWindow", "System Configuration"))
         self.pushButton_4.setText(_translate("MainWindow", "APPLY"))
         self.pushButton_3.setText(_translate("MainWindow", "CANCEL"))
-        #self.groupBox.setTitle(_translate("MainWindow", "Calculation Setting"))
         self.groupBox_Cal.setText(_translate("MainWindow", "Calculation Setting"))
         self.label_5.setText(_translate("MainWindow", "Result1"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "---select---"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox.setItemText(3, _translate("MainWindow", "New Item"))
-        self.comboBox.setItemText(4, _translate("MainWindow", "New Item"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "FirstDev"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "SecondDev"))
+        self.comboBox.setItemText(2, _translate("MainWindow", "meancen2"))
+        self.comboBox.setItemText(3, _translate("MainWindow", "snv"))
+        self.comboBox.setItemText(4, _translate("MainWindow", "msc"))
+
         self.label_11.setText(_translate("MainWindow", "Calibration file1"))
         self.label_15.setText(_translate("MainWindow", "Bias"))
         self.label_6.setText(_translate("MainWindow", "Result2"))
-        self.comboBox_2.setItemText(0, _translate("MainWindow", "---select---"))
-        self.comboBox_2.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(3, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(4, _translate("MainWindow", "New Item"))
+
+        self.comboBox_2.setItemText(0, _translate("MainWindow", "FirstDev"))
+        self.comboBox_2.setItemText(1, _translate("MainWindow", "SecondDev"))
+        self.comboBox_2.setItemText(2, _translate("MainWindow", "meancen2"))
+        self.comboBox_2.setItemText(3, _translate("MainWindow", "snv"))
+        self.comboBox_2.setItemText(4, _translate("MainWindow", "msc"))
+
         self.label_17.setText(_translate("MainWindow", "Calibration file2"))
         self.label_18.setText(_translate("MainWindow", "Bias"))
         self.label_7.setText(_translate("MainWindow", "Result3"))
-        self.comboBox_3.setItemText(0, _translate("MainWindow", "---select---"))
-        self.comboBox_3.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox_3.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox_3.setItemText(3, _translate("MainWindow", "New Item"))
-        self.comboBox_3.setItemText(4, _translate("MainWindow", "New Item"))
+        self.comboBox_3.setItemText(0, _translate("MainWindow", "FirstDev"))
+        self.comboBox_3.setItemText(1, _translate("MainWindow", "SecondDev"))
+        self.comboBox_3.setItemText(2, _translate("MainWindow", "meancen2"))
+        self.comboBox_3.setItemText(3, _translate("MainWindow", "snv"))
+        self.comboBox_3.setItemText(4, _translate("MainWindow", "msc"))
+
         self.label_19.setText(_translate("MainWindow", "Calibration file3"))
         self.label_20.setText(_translate("MainWindow", "Bias"))
         self.label_8.setText(_translate("MainWindow", "Result4"))
         self.label_1_.setText(_translate("MainWindow", "...."))
+        self.label_2_.setText(_translate("MainWindow", "...."))
+        self.label_3_.setText(_translate("MainWindow", "...."))
+        self.label_4_.setText(_translate("MainWindow", "...."))
+        self.label_5_.setText(_translate("MainWindow", "...."))
 
-        self.comboBox_4.setItemText(0, _translate("MainWindow", "---select---"))
-        self.comboBox_4.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox_4.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox_4.setItemText(3, _translate("MainWindow", "New Item"))
-        self.comboBox_4.setItemText(4, _translate("MainWindow", "New Item"))
+        self.comboBox_4.setItemText(0, _translate("MainWindow", "FirstDev"))
+        self.comboBox_4.setItemText(1, _translate("MainWindow", "SecondDev"))
+        self.comboBox_4.setItemText(2, _translate("MainWindow", "meancen2"))
+        self.comboBox_4.setItemText(3, _translate("MainWindow", "snv"))
+        self.comboBox_4.setItemText(4, _translate("MainWindow", "msc"))
+
         self.label_21.setText(_translate("MainWindow", "Calibration file4"))
         self.label_22.setText(_translate("MainWindow", "Bias"))
         self.label_9.setText(_translate("MainWindow", "Result5"))
-        self.comboBox_5.setItemText(0, _translate("MainWindow", "---select---"))
-        self.comboBox_5.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox_5.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox_5.setItemText(3, _translate("MainWindow", "New Item"))
-        self.comboBox_5.setItemText(4, _translate("MainWindow", "New Item"))
+
+        self.comboBox_5.setItemText(0, _translate("MainWindow", "FirstDev"))
+        self.comboBox_5.setItemText(1, _translate("MainWindow", "SecondDev"))
+        self.comboBox_5.setItemText(2, _translate("MainWindow", "meancen2"))
+        self.comboBox_5.setItemText(3, _translate("MainWindow", "snv"))
+        self.comboBox_5.setItemText(4, _translate("MainWindow", "msc"))
+        
         self.label_23.setText(_translate("MainWindow", "Calibration file5"))
         self.label_24.setText(_translate("MainWindow", "Bias"))
         #self.groupBox_2.setTitle(_translate("MainWindow", "Spectrometer Setting"))
@@ -549,6 +613,11 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "M"))
         self.btnBack.setText(_translate("MainWindow", "Back"))
         self.btn1.setText(_translate("MainWindow", "browse"))
+        self.btn2.setText(_translate("MainWindow", "browse"))
+        self.btn3.setText(_translate("MainWindow", "browse"))
+        self.btn4.setText(_translate("MainWindow", "browse"))
+        self.btn5.setText(_translate("MainWindow", "browse"))
+
         self.btnApply.setText(_translate("MainWindow", "Apply"))
 
 #        self.labelTime.setText(_translate("MainWindow", x.strftime("%c")))

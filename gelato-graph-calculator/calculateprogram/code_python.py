@@ -2,7 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-# In[2]:
+
 def FirstDev(wave=None,x=None,s=None,g=None):
     xx = x.shape[0]
     xy = x.shape[1]
@@ -28,11 +28,6 @@ def FirstDev(wave=None,x=None,s=None,g=None):
     plt.xlim(np.min(wave),np.max(wave))
     plt.show() 
     return sd1
-
-
-# In[3]:
-
-
 def SecondDev(wave,x,s,g,):
     xx = x.shape[0]
     xy = x.shape[1]
@@ -59,11 +54,6 @@ def SecondDev(wave,x,s,g,):
     plt.xlim(np.min(wave),np.max(wave))
     # plt.show()
     return  plt,sd2
-
-
-# In[4]:
-
-
 def meancen2(wave=None,x=None):
     xx = x.shape[0]
     xy = x.shape[1]
@@ -88,11 +78,6 @@ def meancen2(wave=None,x=None):
     plt.xlim(np.min(wave),np.max(wave))
     # plt.show()
     return  plt,meanC
-
-
-# In[5]:
-
-
 def snv(wave,x):
     xx = x.shape[0]
     xy = x.shape[1]
@@ -119,11 +104,6 @@ def snv(wave,x):
     plt.xlim(np.min(wave),np.max(wave))
     # plt.show()
     return  plt,snv_data
-
-
-# In[6]:
-
-
 def msc(sp,nargout=1):
     if nargout == 1:
         nos = x.shape[0]
@@ -159,6 +139,7 @@ def msc(sp,nargout=1):
         inter=np.tile(Y[:,1],(wave,1)).T
         spmsc=(sp - inter) / slope
         spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+        
         return spmsc,mscval
 
 

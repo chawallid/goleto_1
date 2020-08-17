@@ -562,12 +562,14 @@ class MyApp(QMainWindow):
             print("result shape :", result.shape)              
             print("result :", result)
             result1 = result
-            self.dashborad.result1.setText(str(result))
+            # print(result[0][0])
+            # print(np.prod(result[1].shape))
+            self.dashborad.result1.setText(str(int(result[0][0])))
 
             self.dashborad.figure.clear()
             ax = self.dashborad.figure.add_subplot(121)
 
-            print("wave.shape | x[0].shape :",wave.shape,x[0].shape)
+            # print("wave.shape | x[0].shape :",wave.shape,x[0].shape)
             for i in range (x.shape[0]):  
                 ax.plot(wave.tolist(),x[i].tolist())
 
@@ -664,7 +666,7 @@ class MyApp(QMainWindow):
             print("result shape :", result.shape)              
             print("result :", result)
             result2 = result
-            self.dashborad.result2.setText(str(result))
+            self.dashborad.result2.setText(str(int(result[0][0])))
 
             self.dashborad.figure1.clear()
             ax = self.dashborad.figure1.add_subplot(121)
@@ -760,7 +762,7 @@ class MyApp(QMainWindow):
             print("result shape :", result.shape)              
             print("result :", result)
             result3 = result
-            self.dashborad.result3.setText(str(result))
+            self.dashborad.result3.setText(str(int(result[0][0])))
 
             self.dashborad.figure2.clear()
             ax = self.dashborad.figure2.add_subplot(121)
@@ -857,7 +859,7 @@ class MyApp(QMainWindow):
             print("result shape :", result.shape)              
             print("result :", result)
             result4 = result
-            self.dashborad.result4.setText(str(result))
+            self.dashborad.result4.setText(str(int(result[0][0])))
 
             self.dashborad.figure3.clear()
             ax = self.dashborad.figure3.add_subplot(121)
@@ -952,7 +954,7 @@ class MyApp(QMainWindow):
             print("result shape :", result.shape)              
             print("result :", result)
             result5 = result
-            self.dashborad.result5.setText(str(result))
+            self.dashborad.result5.setText(str(int(result[0][0])))
             self.dashborad.figure4.clear()
             ax = self.dashborad.figure4.add_subplot(121)
 

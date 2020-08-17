@@ -269,7 +269,6 @@ class MyApp(QMainWindow):
 
         self.dashborad.START.clicked.connect(self.getWave)
         self.systemconfig.pushButton_4.clicked.connect(self.getApply)
-
         self.prepro.pushButton_4.clicked.connect(self.getPrepair)
 
         # self.setInterval(self ,10, self.hello, 'world!')
@@ -287,6 +286,9 @@ class MyApp(QMainWindow):
         print("[func] : getPrepair")
         print("1st :" , g_1 , s_1)
         print("2nd :" , s_2 , g_2)
+
+        self.prepro.centralwidget.hide()
+        self.dashborad.centralwidget.show()
     
     def getbtn1(self):
         global file_1

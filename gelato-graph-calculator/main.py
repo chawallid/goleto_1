@@ -255,8 +255,8 @@ class MyApp(QMainWindow):
         self.dashborad.buttonPrePro.clicked.connect(self.prepro.centralwidget.show)
         self.dashborad.buttonPrePro.clicked.connect(self.dashborad.centralwidget.hide)
 
-        self.prepro.btnBack.clicked.connect(self.prepro.centralwidget.hide)
-        self.prepro.btnBack.clicked.connect(self.dashborad.centralwidget.show)
+        # self.prepro.btnBack.clicked.connect(self.prepro.centralwidget.hide)
+        # self.prepro.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
         self.prepro.pushButton_3.clicked.connect(self.prepro.centralwidget.hide)
         self.prepro.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
@@ -278,8 +278,9 @@ class MyApp(QMainWindow):
         self.systemconfig.pushButton_4.clicked.connect(self.getApply)
         self.prepro.pushButton_4.clicked.connect(self.getPrepair)
 
-        self.systemconfig.btnApply.clicked.connect(self.getApply)
-        self.prepro.btnApply.clicked.connect(self.getPrepair)
+        # self.systemconfig.btnApply.clicked.connect(self.getApply)
+        # self.prepro.btnApply.clicked.connect(self.getPrepair)
+        
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)
     def getPrepair(self):

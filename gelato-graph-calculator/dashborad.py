@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.EXIT.setDefault(False)
         self.EXIT.setObjectName("EXIT")
         self.START = QtWidgets.QPushButton(self.centralwidget)
-        self.START.setGeometry(QtCore.QRect(1090, 340, 161, 51))
+        self.START.setGeometry(QtCore.QRect(1100, 325, 140, 40))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(20)
@@ -60,6 +60,20 @@ class Ui_MainWindow(object):
 "border-radius: 20px;\n"
 "background-color: rgb(106, 255, 106);")
         self.START.setObjectName("START")
+
+        self.STOP = QtWidgets.QPushButton(self.centralwidget)
+        self.STOP.setGeometry(QtCore.QRect(1100, 370, 140, 40))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(18)
+        font.setBold(True)
+        font.setWeight(75)
+        self.STOP.setFont(font)
+        self.STOP.setStyleSheet("border: 0px solid red;\n"
+"border-radius: 20px;\n"
+"background-color: rgb(255,0,0);")
+        self.STOP.setObjectName("STOP")
+
         self.dateNtime = QtWidgets.QLabel(self.centralwidget)
         self.dateNtime.setGeometry(QtCore.QRect(430, 20, 448, 39))
         font = QtGui.QFont()
@@ -383,6 +397,7 @@ class Ui_MainWindow(object):
         self.frame.raise_()
         self.EXIT.raise_()
         self.START.raise_()
+        self.STOP.raise_()
         self.dateNtime.raise_()
         self.tabWidget.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
@@ -447,6 +462,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.EXIT.setText(_translate("MainWindow", "EXIT"))
         self.START.setText(_translate("MainWindow", "START"))
+        self.STOP.setText(_translate("MainWindow", "STOP"))
         self.dateNtime.setText(_translate("MainWindow", "<font color=\"black\">DD MMM | HH : MM AM/PM</font>"))
         self.result1.setText(_translate("MainWindow", "0"))
         self.result2.setText(_translate("MainWindow", "0"))
@@ -481,12 +497,12 @@ class Ui_MainWindow(object):
         self.actionStart.setText(_translate("MainWindow", "Start"))
         self.actionStop.setText(_translate("MainWindow", "Stop"))
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     MainWindow = QtWidgets.QMainWindow()
-#     ui = Ui_MainWindow()
-#     ui.setupUi(MainWindow)
-#     MainWindow.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 

@@ -274,13 +274,15 @@ class MyApp(QMainWindow):
         self.systemconfig.btn5.clicked.connect(self.getbtn5)
 
         self.dashborad.START.clicked.connect(self.getWave)
+        
+        self.dashborad.STOP.clicked.connect(self.getApply)
 
         self.systemconfig.pushButton_4.clicked.connect(self.getApply)
         self.prepro.pushButton_4.clicked.connect(self.getPrepair)
 
         # self.systemconfig.btnApply.clicked.connect(self.getApply)
         # self.prepro.btnApply.clicked.connect(self.getPrepair)
-        
+
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)
     def getPrepair(self):

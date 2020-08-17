@@ -151,7 +151,7 @@ class Ui_MainWindow(object):
 "border-radius: 20px;")
         self.result3.setAlignment(QtCore.Qt.AlignCenter)
         self.result3.setObjectName("result3")
-        self.label_result1 = QtWidgets.QLabel(self.frame)
+        self.label_result1 = QtWidgets.QLineEdit(self.frame)
         self.label_result1.setGeometry(QtCore.QRect(30, 230, 81, 21))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -164,9 +164,9 @@ class Ui_MainWindow(object):
         self.label_result1.setStyleSheet("font: 75 16pt \"Tahoma\";\n"
 "color: \"white\";\n"
 "background-color: rgba(255, 255, 255, 0);")
-        self.label_result1.setWordWrap(False)
+        # self.label_result1.setWordWrap(False)
         self.label_result1.setObjectName("label_result1")
-        self.label_result2 = QtWidgets.QLabel(self.frame)
+        self.label_result2 = QtWidgets.QLineEdit(self.frame)
         self.label_result2.setGeometry(QtCore.QRect(280, 230, 81, 21))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -179,9 +179,9 @@ class Ui_MainWindow(object):
         self.label_result2.setStyleSheet("font: 75 16pt \"Tahoma\";\n"
 "color: \"white\";\n"
 "background-color: rgba(255, 255, 255, 0);")
-        self.label_result2.setWordWrap(False)
+        # self.label_result2.setWordWrap(False)
         self.label_result2.setObjectName("label_result2")
-        self.label_result3 = QtWidgets.QLabel(self.frame)
+        self.label_result3 = QtWidgets.QLineEdit(self.frame)
         self.label_result3.setGeometry(QtCore.QRect(540, 230, 81, 21))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -194,9 +194,9 @@ class Ui_MainWindow(object):
         self.label_result3.setStyleSheet("font: 75 16pt \"Tahoma\";\n"
 "color: \"white\";\n"
 "background-color: rgba(255, 255, 255, 0);")
-        self.label_result3.setWordWrap(False)
+        # self.label_result3.setWordWrap(False)
         self.label_result3.setObjectName("label_result3")
-        self.label_result4 = QtWidgets.QLabel(self.frame)
+        self.label_result4 = QtWidgets.QLineEdit(self.frame)
         self.label_result4.setGeometry(QtCore.QRect(800, 230, 81, 21))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -209,9 +209,9 @@ class Ui_MainWindow(object):
         self.label_result4.setStyleSheet("font: 75 16pt \"Tahoma\";\n"
 "color: \"white\";\n"
 "background-color: rgba(255, 255, 255, 0);")
-        self.label_result4.setWordWrap(False)
+        # self.label_result4.setWordWrap(False)
         self.label_result4.setObjectName("label_result4")
-        self.label_result5 = QtWidgets.QLabel(self.frame)
+        self.label_result5 = QtWidgets.QLineEdit(self.frame)
         self.label_result5.setGeometry(QtCore.QRect(1060, 230, 81, 21))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -224,7 +224,7 @@ class Ui_MainWindow(object):
         self.label_result5.setStyleSheet("font: 75 16pt \"Tahoma\";\n"
 "color: \"white\";\n"
 "background-color: rgba(255, 255, 255, 0);")
-        self.label_result5.setWordWrap(False)
+        # self.label_result5.setWordWrap(False)
         self.label_result5.setObjectName("label_result5")
         self.label_result1_2 = QtWidgets.QLabel(self.frame)
         self.label_result1_2.setGeometry(QtCore.QRect(200, 230, 21, 21))
@@ -447,7 +447,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.EXIT.setText(_translate("MainWindow", "EXIT"))
         self.START.setText(_translate("MainWindow", "START"))
-        self.dateNtime.setText(_translate("MainWindow", "<font color=\"balck\">DD MMM | HH : MM AM/PM</font>"))
+        self.dateNtime.setText(_translate("MainWindow", "<font color=\"black\">DD MMM | HH : MM AM/PM</font>"))
         self.result1.setText(_translate("MainWindow", "0"))
         self.result2.setText(_translate("MainWindow", "0"))
         self.result4.setText(_translate("MainWindow", "0"))
@@ -458,11 +458,11 @@ class Ui_MainWindow(object):
         self.label_result3.setText(_translate("MainWindow", "Result 3"))
         self.label_result4.setText(_translate("MainWindow", "Result 4"))
         self.label_result5.setText(_translate("MainWindow", "Result 5"))
-        self.label_result1_2.setText(_translate("MainWindow", "Edit"))
-        self.label_result1_3.setText(_translate("MainWindow", "Edit"))
-        self.label_result1_4.setText(_translate("MainWindow", "Edit"))
-        self.label_result1_5.setText(_translate("MainWindow", "Edit"))
-        self.label_result1_6.setText(_translate("MainWindow", "Edit"))
+        # self.label_result1_2.setText(_translate("MainWindow", "Edit"))
+        # self.label_result1_3.setText(_translate("MainWindow", "Edit"))
+        # self.label_result1_4.setText(_translate("MainWindow", "Edit"))
+        # self.label_result1_5.setText(_translate("MainWindow", "Edit"))
+        # self.label_result1_6.setText(_translate("MainWindow", "Edit"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas), _translate("MainWindow", "Curves 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas1), _translate("MainWindow", "Curves 2"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.canvas2), _translate("MainWindow", "Curves 3"))

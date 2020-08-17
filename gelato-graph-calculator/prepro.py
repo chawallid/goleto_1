@@ -96,6 +96,10 @@ class Ui_MainWindow(object):
 "\n"
 "")
         self.spinBox.setObjectName("spinBox")
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        self.spinBox.setFont(font)
         self.label = QtWidgets.QLabel(self.widget_14)
         self.label.setGeometry(QtCore.QRect(370, 10, 50, 30)) #Gab2ndL
         self.label.setObjectName("label")
@@ -117,6 +121,7 @@ class Ui_MainWindow(object):
         self.label_17.setGeometry(QtCore.QRect(50, 25, 200, 30)) #smoothL
         self.label_17.setStyleSheet("align:\"center\"")
         self.label_17.setObjectName("label_17")
+
         self.spinBox_3 = QtWidgets.QSpinBox(self.widget_15)
         self.spinBox_3.setGeometry(QtCore.QRect(385, 40, 80, 40)) #GabSmoothB
         self.spinBox_3.setObjectName("spinBox_3")
@@ -253,7 +258,7 @@ class Ui_MainWindow(object):
         self.label_4.setStyleSheet("font: 14pt \"Tahoma\";")
         self.label_4.setObjectName("label_4")
         
-        self.widget_8 = QtWidgets.QWidget(self.widget_3)
+        self.widget_8 = QtWidgets.QLineEdit(self.widget_3)
         self.widget_8.setGeometry(QtCore.QRect(100, 100, 600, 80))
         self.widget_8.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 32pt \"Tahoma\";")
@@ -276,10 +281,12 @@ class Ui_MainWindow(object):
 "color:#fff;")
         self.pushButton_4.setObjectName("pushButton_4")
         # MainWindow.setCentralWidget(self.centralwidget)
-
-        self.lineEdit = QtWidgets.QLineEdit(self.widget_8)
-        self.lineEdit.setGeometry(QtCore.QRect(200, 100, 250, 100)) #boxToTypeUsername
-        self.lineEdit.setObjectName("lineEdit")
+# centralwidget
+#         self.lineEdit = QtWidgets.QLineEdit(self.widget_8)
+        # self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        # self.lineEdit.setGeometry(QtCore.QRect(10, 120, 111, 61)) 
+        # self.lineEdit.setGeometry(QtCore.QRect(200, 100, 250, 100)) #boxToTypeUsername
+        # self.lineEdit.setObjectName("lineEdit")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -330,7 +337,7 @@ class Ui_MainWindow(object):
         self.comboBox_3.setItemText(4, _translate("MainWindow", "1st Derivative"))
         self.comboBox_3.setItemText(5, _translate("MainWindow", "2nd Derivative"))
         self.label_4.setText(_translate("MainWindow", "Username"))
-        self.lineEdit.setText(_translate("MainWindow", "Type your name..."))
+        self.widget_8.setText(_translate("MainWindow", "Type your name..."))
         self.pushButton_3.setText(_translate("MainWindow", "CANCEL"))
         self.pushButton_4.setText(_translate("MainWindow", "APPLY"))
         # self.btnBack.setText(_translate("MainWindow", "Back"))

@@ -255,11 +255,17 @@ class MyApp(QMainWindow):
         self.dashborad.buttonPrePro.clicked.connect(self.prepro.centralwidget.show)
         self.dashborad.buttonPrePro.clicked.connect(self.dashborad.centralwidget.hide)
 
+        self.prepro.btnBack.clicked.connect(self.prepro.centralwidget.hide)
+        self.prepro.btnBack.clicked.connect(self.dashborad.centralwidget.show)
+
         self.prepro.pushButton_3.clicked.connect(self.prepro.centralwidget.hide)
         self.prepro.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
         
         self.systemconfig.pushButton_3.clicked.connect(self.systemconfig.centralwidget.hide)
         self.systemconfig.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
+
+        self.systemconfig.btnBack.clicked.connect(self.systemconfig.centralwidget.hide)
+        self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
         self.systemconfig.btn1.clicked.connect(self.getbtn1)
         self.systemconfig.btn2.clicked.connect(self.getbtn2)
@@ -268,9 +274,12 @@ class MyApp(QMainWindow):
         self.systemconfig.btn5.clicked.connect(self.getbtn5)
 
         self.dashborad.START.clicked.connect(self.getWave)
+
         self.systemconfig.pushButton_4.clicked.connect(self.getApply)
         self.prepro.pushButton_4.clicked.connect(self.getPrepair)
 
+        self.systemconfig.btnApply.clicked.connect(self.getApply)
+        self.prepro.btnApply.clicked.connect(self.getPrepair)
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)
     def getPrepair(self):
@@ -361,13 +370,54 @@ class MyApp(QMainWindow):
         QMessageBox.about(self, "Title", "Message")
 
     def getApply(self):
+
+        print("[func] : getApply")
         global file_1,file_2,file_3,file_4,file_5
         global wave_1,x_1,s_1,g_1,sd1_1,sd2_1
         global wave_2,x_2,s_2,g_2,sd1_2,sd2_2
         global wave_3,x_3,s_3,g_3,sd1_3,sd2_3
         global wave_4,x_4,s_4,g_4,sd1_4,sd2_4
         global wave_5,x_5,s_5,g_5,sd1_5,sd2_5
-        # global sd1,sd2
+
+        global x_coordinates1,list_tmp1
+        global x_coordinates2,list_tmp2
+        global x_coordinates3,list_tmp3
+        global x_coordinates4,list_tmp4
+        global x_coordinates5,list_tmp5
+        global result1,result2,result3,result4,result5
+        global count_graph,clickStart
+
+
+        clickStart = False
+
+        result1 = []
+        result2 = []
+        result3 = []
+        result4 = []
+        result5 = []
+
+
+        count_graph = 0
+        x_coordinates1 = []
+        x_coordinates2 = []
+        x_coordinates3 = []
+        x_coordinates4 = []
+        x_coordinates5 = []
+        list_tmp1 = []
+        for j in range(225):
+            list_tmp1.append([0])
+        list_tmp2 = []
+        for j in range(225):
+            list_tmp2.append([0])
+        list_tmp3 = []
+        for j in range(225):
+            list_tmp3.append([0])
+        list_tmp4 = []
+        for j in range(225):
+            list_tmp4.append([0])
+        list_tmp5 = []
+        for j in range(225):
+            list_tmp5.append([0])
 
         if(file_1 != ""):
             print(file_1)
@@ -914,6 +964,7 @@ class MyApp(QMainWindow):
             ax2.set_xlim(np.min(wave),np.max(wave))
             self.dashborad.canvas4.draw()
             print("draw succ5")
+        
     def FirstDev(self):
         global wave,x,s,g,sd1
         xx = x.shape[0]

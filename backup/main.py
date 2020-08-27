@@ -1,4 +1,8 @@
 import sys
+from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QFileDialog, QLabel
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 from matplotlib.backends.backend_pdf import PdfPages
 
@@ -9,10 +13,7 @@ import pandas as pd
 
 from fpdf import FPDF
 
-from PyQt5.QtWidgets import QMainWindow , QScrollArea,QApplication , QWidget , QVBoxLayout, QPushButton, QGroupBox, QGridLayout
-from PyQt5.QtGui import QIcon, QFont
-from PyQt5.QtCore import Qt, QSize
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
 
 import time
 from datetime import datetime
@@ -74,20 +75,26 @@ global wave_5,x_5,s_5,g_5,sd1_5,sd2_5
 
 class MyApp(QMainWindow):
     def __init__(self, parent=None):
-            QWidget.__init__(self, parent)
+        QWidget.__init__(self, parent)
+        self.dashborad = Ui_Dashborad()
+        self.prepro =  Ui_Prepro()
+        self.systemconfig = Ui_SystemConfig()
 
-            self.dashborad = Ui_Dashborad()
-            self.dashborad.show()
-            self.prepro =  Ui_Prepro()
-            self.prepro.hide()
-            self.systemconfig = Ui_SystemConfig()
-            self.systemconfig.hide()
-            self.setupUi()
+        self.dashborad.setupUi(self)
 
-            self.timer = QtCore.QTimer()
-            self.timer.setInterval(1000)
-            self.timer.timeout.connect(self.recurring_timer)
-            self.timer.start()
+        self.prepro.setupUi(self)
+        self.prepro.centralwidget.hide()
+
+        self.systemconfig.setupUi(self)
+        self.systemconfig.centralwidget.hide()
+        
+        
+        self.setupUi()
+
+        self.timer = QTimer()
+        self.timer.setInterval(1000)
+        self.timer.timeout.connect(self.recurring_timer)
+        self.timer.start()
 
     def recurring_timer(self):
         global clickStart,wave_1,x,x_1,sd,sd1_1,result1,count_graph
@@ -108,17 +115,20 @@ class MyApp(QMainWindow):
 
         current_time = now.strftime("%d %B %Y  %H:%M:%S")
         self.dashborad.dateNtime.setText(current_time)
-        self.dashborad.tabWidget.setTabText(0, self.dashborad.label_result1.text())
-        self.dashborad.tabWidget.setTabText(1, self.dashborad.label_result2.text())
-        self.dashborad.tabWidget.setTabText(2, self.dashborad.label_result3.text())
-        self.dashborad.tabWidget.setTabText(3, self.dashborad.label_result4.text())
-        self.dashborad.tabWidget.setTabText(4, self.dashborad.label_result5.text())
+
         if(clickStart):
             if(file_1 != ""):
                 if(count_graph < np.prod(result1[0].shape)):
                     wave = wave_1
                     self.dashborad.figure.clear()
-                    ax2 = self.dashborad.figure.add_subplot(111)
+                    ax = self.dashborad.figure.add_subplot(121)
+                    x = x_1
+                    for i in range (x.shape[0]):  
+                        ax.plot(wave.tolist(),x[i].tolist())
+                    ax.set_xlabel('wavelenght, nm')
+                    ax.set_ylabel('log 1/R')
+                    ax.set_xlim(np.min(wave),np.max(wave))
+                    ax2 = self.dashborad.figure.add_subplot(122)
                     test = result1
                     x_coordinates1.append(count_graph)
                     for j in range(225):
@@ -135,7 +145,15 @@ class MyApp(QMainWindow):
                 if(count_graph < np.prod(result2[0].shape)):
                     wave = wave_2
                     self.dashborad.figure1.clear()
-                    ax2 = self.dashborad.figure1.add_subplot(111)
+                    ax = self.dashborad.figure1.add_subplot(121)
+                    x = x_2
+                    for i in range (x.shape[0]):  
+                        ax.plot(wave.tolist(),x[i].tolist())
+
+                    ax.set_xlabel('wavelenght, nm')
+                    ax.set_ylabel('log 1/R')
+                    ax.set_xlim(np.min(wave),np.max(wave))
+                    ax2 = self.dashborad.figure1.add_subplot(122)
                     test = result2
                     x_coordinates2.append(count_graph)
                     for j in range(225):
@@ -153,7 +171,15 @@ class MyApp(QMainWindow):
                     # print("111")
                     wave = wave_3
                     self.dashborad.figure2.clear()
-                    ax2 = self.dashborad.figure2.add_subplot(111)
+                    ax = self.dashborad.figure2.add_subplot(121)
+                    x = x_3
+                    for i in range (x.shape[0]):  
+                        ax.plot(wave.tolist(),x[i].tolist())
+
+                    ax.set_xlabel('wavelenght, nm')
+                    ax.set_ylabel('log 1/R')
+                    ax.set_xlim(np.min(wave),np.max(wave))
+                    ax2 = self.dashborad.figure2.add_subplot(122)
                     test = result3
                     x_coordinates3.append(count_graph)
                     for j in range(225):
@@ -171,7 +197,15 @@ class MyApp(QMainWindow):
                 if(count_graph < np.prod(result4[0].shape)):
                     wave = wave_4
                     self.dashborad.figure3.clear()
-                    ax2 = self.dashborad.figure3.add_subplot(111)
+                    ax = self.dashborad.figure3.add_subplot(121)
+                    x = x_4
+                    for i in range (x.shape[0]):  
+                        ax.plot(wave.tolist(),x[i].tolist())
+
+                    ax.set_xlabel('wavelenght, nm')
+                    ax.set_ylabel('log 1/R')
+                    ax.set_xlim(np.min(wave),np.max(wave))
+                    ax2 = self.dashborad.figure3.add_subplot(122)
                     test = result4
                     x_coordinates4.append(count_graph)
                     for j in range(225):
@@ -189,7 +223,15 @@ class MyApp(QMainWindow):
                 if(count_graph < np.prod(result5[0].shape)):
                     wave = wave_5
                     self.dashborad.figure4.clear()
-                    ax2 = self.dashborad.figure4.add_subplot(111)
+                    ax = self.dashborad.figure4.add_subplot(121)
+                    x = x_5
+                    for i in range (x.shape[0]):  
+                        ax.plot(wave.tolist(),x[i].tolist())
+
+                    ax.set_xlabel('wavelenght, nm')
+                    ax.set_ylabel('log 1/R')
+                    ax.set_xlim(np.min(wave),np.max(wave))
+                    ax2 = self.dashborad.figure4.add_subplot(122)
                     test = result5
                     x_coordinates5.append(count_graph)
                     for j in range(225):
@@ -206,23 +248,23 @@ class MyApp(QMainWindow):
             count_graph = count_graph + 1
 
     def setupUi(self):
-        self.dashborad.buttonSysConfig.clicked.connect(self.systemconfig.show)
-        self.dashborad.buttonSysConfig.clicked.connect(self.dashborad.hide)
+        self.dashborad.buttonSysConfig.clicked.connect(self.systemconfig.centralwidget.show)
+        self.dashborad.buttonSysConfig.clicked.connect(self.dashborad.centralwidget.hide)
 
-        self.dashborad.buttonPrePro.clicked.connect(self.prepro.show)
-        self.dashborad.buttonPrePro.clicked.connect(self.dashborad.hide)
+        self.dashborad.buttonPrePro.clicked.connect(self.prepro.centralwidget.show)
+        self.dashborad.buttonPrePro.clicked.connect(self.dashborad.centralwidget.hide)
 
         # self.prepro.btnBack.clicked.connect(self.prepro.centralwidget.hide)
         # self.prepro.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
-        self.prepro.pushButton_3.clicked.connect(self.prepro.hide)
-        self.prepro.pushButton_3.clicked.connect(self.dashborad.show)
+        self.prepro.pushButton_3.clicked.connect(self.prepro.centralwidget.hide)
+        self.prepro.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
         
-        self.systemconfig.pushButton_3.clicked.connect(self.systemconfig.hide)
-        self.systemconfig.pushButton_3.clicked.connect(self.dashborad.show)
+        self.systemconfig.pushButton_3.clicked.connect(self.systemconfig.centralwidget.hide)
+        self.systemconfig.pushButton_3.clicked.connect(self.dashborad.centralwidget.show)
 
-        # self.systemconfig.btnBack.clicked.connect(self.systemconfig.centralwidget.hide)
-        # self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
+        self.systemconfig.btnBack.clicked.connect(self.systemconfig.centralwidget.hide)
+        self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
         self.systemconfig.btn1.clicked.connect(self.getbtn1)
         self.systemconfig.btn2.clicked.connect(self.getbtn2)
@@ -243,26 +285,25 @@ class MyApp(QMainWindow):
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)
     def getPrepair(self):
-        print("[func] : getPrepair")
-
+        
         global g_1,g_2,s_1,s_2
+
         g_1 = int(self.prepro.spinBox_7.value())
-        g_2 = int(self.prepro.spinBox_Seg_1st.value())
+        g_2 = int(self.prepro.spinBox.value())
         # print("1st :" , g_1 , g_2)
         s_1 = int(self.prepro.spinBox_8.value())
-        s_2 = int(self.prepro.spinBox_Seg_2nd.value())
+        s_2 = int(self.prepro.spinBox_2.value())
 
-       
+        print("[func] : getPrepair")
         print("1st :" , g_1 , s_1)
         print("2nd :" , s_2 , g_2)
 
-        self.prepro.hide()
-        self.dashborad.show()
+        self.prepro.centralwidget.hide()
+        self.dashborad.centralwidget.show()
     
     def getbtn1(self):
-        print()
         global file_1
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
         imagePath = fname[0]
         file_1 = fname[0]
         file_tmp = imagePath.split("/")
@@ -270,7 +311,7 @@ class MyApp(QMainWindow):
 
     def getbtn2(self):
         global file_2
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
         imagePath = fname[0]
         file_2 = fname[0]
         file_tmp = imagePath.split("/")
@@ -286,7 +327,7 @@ class MyApp(QMainWindow):
 
     def getbtn4(self):
         global file_4
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
         imagePath = fname[0]
         file_4 = fname[0]
         file_tmp = imagePath.split("/")
@@ -294,7 +335,7 @@ class MyApp(QMainWindow):
 
     def getbtn5(self):
         global file_5
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
         imagePath = fname[0]
         file_5 = fname[0]
         file_tmp = imagePath.split("/")
@@ -321,8 +362,8 @@ class MyApp(QMainWindow):
                     print("2nd Derivative")
                 else: 
                     pdf.savefig()
-        self.prepro.hide()
-        self.dashborad.show()
+        self.prepro.centralwidget.hide()
+        self.dashborad.centralwidget.show()
                 
         
 
@@ -419,8 +460,8 @@ class MyApp(QMainWindow):
             x_5 = np.array(X)
 
 
-        self.systemconfig.hide()
-        self.dashborad.show()
+        self.systemconfig.centralwidget.hide()
+        self.dashborad.centralwidget.show()
 
     def getWave(self ):
         global clickStart
@@ -445,8 +486,7 @@ class MyApp(QMainWindow):
             print("file_1")
             wave = wave_1
             x = x_1
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
-            print(steps)
+            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
             result = x_1
             fristLoop = True
             for files in steps :
@@ -526,7 +566,17 @@ class MyApp(QMainWindow):
             self.dashborad.result1.setText(str(int(result[0][0])))
 
             self.dashborad.figure.clear()
-            ax2 = self.dashborad.figure.add_subplot(111)
+            ax = self.dashborad.figure.add_subplot(121)
+
+            # print("wave.shape | x[0].shape :",wave.shape,x[0].shape)
+            for i in range (x.shape[0]):  
+                ax.plot(wave.tolist(),x[i].tolist())
+
+            ax.set_xlabel('wavelenght, nm')
+            ax.set_ylabel('log 1/R')
+            ax.set_xlim(np.min(wave),np.max(wave))
+
+            ax2 = self.dashborad.figure.add_subplot(122)
 
             ax2.set_xlabel('wavelenght, nm')
             ax2.set_ylabel('log 1/R')
@@ -540,7 +590,7 @@ class MyApp(QMainWindow):
             print("file_2")
             x = x_2
             # files = self.systemconfig.comboBox_2.currentText()
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
+            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
             result = x_2
             fristLoop = True
             for files in steps :
@@ -618,7 +668,15 @@ class MyApp(QMainWindow):
             self.dashborad.result2.setText(str(int(result[0][0])))
 
             self.dashborad.figure1.clear()
-            ax2 = self.dashborad.figure1.add_subplot(111)
+            ax = self.dashborad.figure1.add_subplot(121)
+
+            print("wave.shape | x[0].shape :",wave.shape,x[0].shape)
+            for i in range (x.shape[0]):  
+                ax.plot(wave.tolist(),x[i].tolist())
+            ax.set_xlabel('wavelenght, nm')
+            ax.set_ylabel('log 1/R')
+            ax.set_xlim(np.min(wave),np.max(wave))
+            ax2 = self.dashborad.figure1.add_subplot(122)
             ax2.set_xlabel('wavelenght, nm')
             ax2.set_ylabel('log 1/R')
             ax2.set_xlim(np.min(wave),np.max(wave))
@@ -626,10 +684,9 @@ class MyApp(QMainWindow):
             print("draw succ2")
 
         if(file_3 != ""):
-            print("file_3")
             wave = wave_3
             x = x_3
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
+            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
             result = x_3
             fristLoop = True
             for files in steps :
@@ -707,7 +764,15 @@ class MyApp(QMainWindow):
             self.dashborad.result3.setText(str(int(result[0][0])))
 
             self.dashborad.figure2.clear()
-            ax2 = self.dashborad.figure2.add_subplot(111)
+            ax = self.dashborad.figure2.add_subplot(121)
+            print("wave.shape | x[0].shape :",wave.shape,x[0].shape)
+            for i in range (x.shape[0]):  
+                ax.plot(wave.tolist(),x[i].tolist())
+            ax.set_xlabel('wavelenght, nm')
+            ax.set_ylabel('log 1/R')
+            ax.set_xlim(np.min(wave),np.max(wave))
+
+            ax2 = self.dashborad.figure2.add_subplot(122)
             ax2.set_xlabel('wavelenght, nm')
             ax2.set_ylabel('log 1/R')
             ax2.set_xlim(np.min(wave),np.max(wave))
@@ -716,10 +781,9 @@ class MyApp(QMainWindow):
             print("draw succ3")
 
         if(file_4 != ""):
-            print("file_4")
             wave = wave_4
             x = x_4
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
+            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
             result = x_4
             fristLoop = True
             for files in steps :
@@ -797,7 +861,14 @@ class MyApp(QMainWindow):
             self.dashborad.result4.setText(str(int(result[0][0])))
 
             self.dashborad.figure3.clear()
-            ax2 = self.dashborad.figure3.add_subplot(111)
+            ax = self.dashborad.figure3.add_subplot(121)
+
+            for i in range (x.shape[0]):  
+                ax.plot(wave.tolist(),x[i].tolist())
+            ax.set_xlabel('wavelenght, nm')
+            ax.set_ylabel('log 1/R')
+            ax.set_xlim(np.min(wave),np.max(wave))
+            ax2 = self.dashborad.figure3.add_subplot(122)
             ax2.set_xlabel('wavelenght, nm')
             ax2.set_ylabel('log 1/R')
             ax2.set_xlim(np.min(wave),np.max(wave))
@@ -805,10 +876,9 @@ class MyApp(QMainWindow):
             print("draw succ4")
 
         if(file_5 != ""):
-            print("file_5")
             wave = wave_5
             x = x_5
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
+            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox_2.currentText(),self.prepro.comboBox_3.currentText()]
             result = x_5
             fristLoop = True
             for files in steps :
@@ -885,7 +955,14 @@ class MyApp(QMainWindow):
             result5 = result
             self.dashborad.result5.setText(str(int(result[0][0])))
             self.dashborad.figure4.clear()
-            ax2 = self.dashborad.figure4.add_subplot(111)
+            ax = self.dashborad.figure4.add_subplot(121)
+
+            for i in range (x.shape[0]):  
+                ax.plot(wave.tolist(),x[i].tolist())
+            ax.set_xlabel('wavelenght, nm')
+            ax.set_ylabel('log 1/R')
+            ax.set_xlim(np.min(wave),np.max(wave))
+            ax2 = self.dashborad.figure4.add_subplot(122)
             ax2.set_xlabel('wavelenght, nm')
             ax2.set_ylabel('log 1/R')
             ax2.set_xlim(np.min(wave),np.max(wave))
@@ -1019,7 +1096,5 @@ class MyApp(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myapp = MyApp()
-    # myapp.show()
+    myapp.show()
     sys.exit(app.exec_())
-
-    

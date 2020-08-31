@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from fpdf import FPDF
+import os,glob
 
 from PyQt5.QtWidgets import QMainWindow , QScrollArea,QApplication , QWidget , QVBoxLayout, QPushButton, QGroupBox, QGridLayout
 from PyQt5.QtGui import QIcon, QFont
@@ -37,7 +38,7 @@ result2 = []
 result3 = []
 result4 = []
 result5 = []
-
+file_spec = []
 date_arr = []
 count_graph = 0
 x_coordinates1 = []
@@ -65,7 +66,7 @@ global meanC,snv_data,mscval
 
 global wave,x,s,g,sd1,sd2
 
-global wave_1,x_1,s_1,g_1,sd1_1,sd2_1
+global wave_1,x_1,s_1,g_1,sd1_1,sd2_1 
 global wave_2,x_2,s_2,g_2,sd1_2,sd2_2
 global wave_3,x_3,s_3,g_3,sd1_3,sd2_3
 global wave_4,x_4,s_4,g_4,sd1_4,sd2_4
@@ -102,7 +103,7 @@ class MyApp(QMainWindow):
         global wave_3,x_3,s_3,g_3,sd1_3,sd2_3
         global wave_4,x_4,s_4,g_4,sd1_4,sd2_4
         global wave_5,x_5,s_5,g_5,sd1_5,sd2_5
-
+        global file_spec
         now = datetime.now()
         # date_arr.append(now)
 
@@ -114,23 +115,122 @@ class MyApp(QMainWindow):
         self.dashborad.tabWidget.setTabText(3, self.dashborad.label_result4.text())
         self.dashborad.tabWidget.setTabText(4, self.dashborad.label_result5.text())
         if(clickStart):
+
             if(file_1 != ""):
-                if(count_graph < np.prod(result1[0].shape)):
-                    wave = wave_1
+                if(count_graph < int(x_1.shape[0])):
+                    print("file_1")
+                    f = open(file_spec[count_graph], "r")
+                    line = 0
+                    X = []
+                    for x in f:
+                        if(line >= 8):
+                            if(x == "\n"):
+                                continue;
+                            tmp = x.split(";")
+                            X.append([float(tmp[4])])
+                        line+=1
+                    f.close()
+
+                    B = x_1
+                    x = x_1
+                    X = np.array(X)
+                    steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
+                    print("steps :",steps)
+                    print("Data from file calibrate :",B[count_graph].shape)
+                    print("Data from specific folder :",X.transpose().shape)
+                    result = X.transpose().dot(B[count_graph])
+                    print("X.dot(B[",count_graph,"]) :",result)
+                    for step in steps :
+                        if step == "1st Derivative":
+                            s = s_1
+                            g = g_1
+                            self.FirstDev()
+                            print("1st Derivative shape :" , sd1.shape)
+                            # print("1st Derivative data :" , sd1)
+                            result = result*(sd1)
+
+                        elif step == "2nd Derivative":
+                            s = s_2
+                            g = g_2
+                            self.SecondDev()
+                            print("2nd Derivative shape :" , sd2.shape)
+                            # print("2nd Derivative data :" , sd2)
+                            result = result*(sd2)
+                            
+                        elif step == "RAW":
+                            print("RAW shape :" , B[count_graph].transpose().shape)
+                            # print("RAW data :" , x.transpose())
+                            result = result*(B[count_graph].transpose())
+                            
+                        elif step == "SNV":
+                            self.snv()
+                            print("snv_data shape:",snv_data.shape)
+                            # print("snv_data data :",snv_data)
+                            result = result*(snv_data)
+
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            
+                            Ym=np.polyfit(lbd,meansp,1)
+                            mscval=np.copy(Ym)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            result = mscval
+                            print("MSC shape :" , result)
+                        
+
+                    print("B[0] shape :" , B[count_graph].shape ,"bias :" , int(self.systemconfig.spinBox_4.value()))
+                    print("before cal result :", result.shape)  
+                    result = (result*(B[count_graph])) + int(self.systemconfig.spinBox_4.value())
+                    print("after cal result  :", result.shape)              
+                    # print("result :", result)
+                    result1 = result
+                    # print(result[0][0])
+                    # print(np.prod(result[1].shape))
+                    self.dashborad.result1.setText(str(result))
+
                     self.dashborad.figure.clear()
                     ax2 = self.dashborad.figure.add_subplot(111)
                     test = result1
                     x_coordinates1.append(count_graph)
                     for j in range(225):
                         if (count_graph == 0 ):
-                            list_tmp1[j] = [test[count_graph][j]]
+                            list_tmp1[j] = [test[j]]
                         else:
-                            list_tmp1[j].append(test[count_graph][j])
+                            list_tmp1[j].append(test[j])
                         ax2.plot(x_coordinates1, list_tmp1[j])
 
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
                     self.dashborad.canvas.draw()
+                    print("draw 1 succ !!")
+
             if(file_2 != ""):
                 if(count_graph < np.prod(result2[0].shape)):
                     wave = wave_2
@@ -221,6 +321,8 @@ class MyApp(QMainWindow):
         self.systemconfig.pushButton_3.clicked.connect(self.systemconfig.hide)
         self.systemconfig.pushButton_3.clicked.connect(self.dashborad.show)
 
+
+        self.systemconfig.btn_Upload.clicked.connect(self.specific)
         # self.systemconfig.btnBack.clicked.connect(self.systemconfig.centralwidget.hide)
         # self.systemconfig.btnBack.clicked.connect(self.dashborad.centralwidget.show)
 
@@ -242,6 +344,15 @@ class MyApp(QMainWindow):
 
         # self.setInterval(self ,10, self.hello, 'world!')
         # self.prepro.btnApply.clicked.connect(self.getPDF)
+    def specific(self):
+        global file_spec
+        myPath = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        
+        file_spec = []
+        for txtfile in glob.glob(os.path.join(myPath, '*.txt')):
+            file_spec.append(txtfile)
+        print("specific path:",myPath,",numbers :",len(file_spec))
+
     def getPrepair(self):
         print("[func] : getPrepair")
 
@@ -440,100 +551,6 @@ class MyApp(QMainWindow):
 
         s = 0
         g = 0
-
-        if(file_1 != ""):
-            print("file_1")
-            wave = wave_1
-            x = x_1
-            steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
-            print(steps)
-            result = x_1
-            fristLoop = True
-            for files in steps :
-                if files == "1st Derivative":
-                    s = s_1
-                    g = g_1
-                    self.FirstDev()
-                    print("1st Derivative shape :" , sd1.shape)
-                    print("1st Derivative data :" , sd1)
-                    result = result.dot(sd1)
-
-                elif files == "2nd Derivative":
-                    s = s_2
-                    g = g_2
-                    self.SecondDev()
-                    print("2nd Derivative shape :" , sd2.shape)
-                    print("2nd Derivative data :" , sd2)
-                    result = result.dot(sd2)
-                    
-                elif files == "RAW":
-                    print("RAW shape :" , x.transpose().shape)
-                    print("RAW data :" , x.transpose())
-                    result = result.dot(x.transpose())
-                    
-                elif files == "SNV":
-                    self.snv()
-                    print("snv_data shape:",snv_data.shape)
-                    print("snv_data data :",snv_data)
-                    result = result.dot(snv_data)
-
-                elif files == "MSC":
-                    sp = x
-                    nos = x.shape[0]
-                    wave = x.shape[1]
-                    meansp=np.mean(sp,axis=0)
-                    lbd=np.array(range(0,wave))
-                    Ym=np.polyfit(lbd,meansp,1)
-                    slopem=Ym[0]
-                    interm=Ym[1]
-                    Y=np.zeros([nos,2])
-                    for i in range(0,nos):
-                        Y[i,:]=np.polyfit(lbd,sp[i,:],1)
-                    slope=np.tile(Y[:,0],(wave,1)).T
-                    inter=np.tile(Y[:,1],(wave,1)).T
-                    spmsc=(sp - inter) / slope
-                    spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
-                    
-                    nos = x.shape[0]
-                    wave = x.shape[1]
-                    meansp=np.mean(sp,axis=0)
-                    lbd=np.array(range(0,wave))
-                    
-                    Ym=np.polyfit(lbd,meansp,1)
-                    mscval=np.copy(Ym)
-                    slopem=Ym[0]
-                    interm=Ym[1]
-                    Y=np.zeros([nos,2])
-                    for i in range(0,nos):
-                        Y[i,:]=np.polyfit(lbd,sp[i,:],1)
-                    slope=np.tile(Y[:,0],(wave,1)).T
-                    inter=np.tile(Y[:,1],(wave,1)).T
-                    spmsc=(sp - inter) / slope
-                    spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
-                    result = mscval
-                    print("MSC shape :" , result)
-                else: 
-                    print("other")
-            print("x_1 shape :" , x_1.shape)
-            print("bias :" , int(self.systemconfig.spinBox_4.value()))
-
-            result = (result.dot(x_1)) + int(self.systemconfig.spinBox_4.value())
-            print("result shape :", result.shape)              
-            print("result :", result)
-            result1 = result
-            # print(result[0][0])
-            # print(np.prod(result[1].shape))
-            self.dashborad.result1.setText(str(int(result[0][0])))
-
-            self.dashborad.figure.clear()
-            ax2 = self.dashborad.figure.add_subplot(111)
-
-            ax2.set_xlabel('wavelenght, nm')
-            ax2.set_ylabel('log 1/R')
-            ax2.set_xlim(np.min(wave),np.max(wave))
-
-            self.dashborad.canvas.draw()
-            print("draw succ1")
 
         if(file_2 != ""):
             wave = wave_2
@@ -903,28 +920,6 @@ class MyApp(QMainWindow):
             sa=np.mean(x[:,int(i - s - g / 2 + 0.5):int(i - g / 2 - 0.5)], axis = 1)
             sc=np.mean(x[:,int(i + g / 2 + 0.5):int(i + g / 2 - 0.5 + s)], axis = 1)
             sd1[:,i]=sc - sa
-        # print("FirstDev sd1", sd1)
-        # return sd1
-        # # print("pass1")
-        # graph.clear()
-        # # print("pass2")
-        # ax = graph.add_subplot(121)
-        # for i in range (x.shape[0]):  
-        #     ax.plot(wave.tolist(),x[i].tolist())
-
-        # ax.set_xlabel('wavelenght, nm')
-        # ax.set_ylabel('log 1/R')
-        # ax.set_xlim(np.min(wave),np.max(wave))
-
-        # ax2 = graph.add_subplot(122)
-        # for i in range (x.shape[0]):  
-        #     ax2.plot(wave.tolist(),sd1[i].tolist())
-        # ax2.set_xlabel('wavelenght, nm')
-        # ax2.set_ylabel('Log 1/R')
-        # ax2.set_xlim(np.min(wave),np.max(wave))
-
-        # self.dashborad.canvas.draw()
-        # print("draw succ1")
 
     def SecondDev(self):
         global wave,x,s,g,sd2
@@ -939,22 +934,7 @@ class MyApp(QMainWindow):
             x_a=np.mean(x[:,int(i - np.dot(3 / 2,s) - g + 0.5):int(i - s / 2 - g - 0.5)],axis = 1)
             x_b=np.mean(x[:,int(i - s / 2 + 0.5):int(i + s / 2 - 0.5)],axis = 1)
             sd2[:,i]=(x_c) - np.dot(2,(x_b)) + (x_a)
-        # print("SecondDev sd2", sd2)
-        # graph.clear()
-        # ax = graph.add_subplot(121)
-        # for i in range (x.shape[0]):  
-        #     ax.plot(wave.tolist(),x[i].tolist())
-        # ax.set_xlabel('wavelenght, nm')
-        # ax.set_ylabel('log 1/R')
-        # ax.set_xlim(np.min(wave),np.max(wave))
-        # ax2 = graph.add_subplot(122)
-        # for i in range (x.shape[0]):  
-        #     ax2.plot(wave.tolist() , sd2[i].tolist())
-        # ax2.set_xlabel('wavelenght, nm')
-        # ax2.set_ylabel('Log 1/R')
-        # ax2.set_xlim(np.min(wave),np.max(wave))
-        # self.dashborad.canvas1.draw()
-        # print("draw succ2")
+
 
     def meancen2(self):
         global wave,x,s,g,meanC
@@ -982,8 +962,6 @@ class MyApp(QMainWindow):
         ax2.set_ylabel('Log 1/R')
         ax2.set_xlim(np.min(wave),np.max(wave))
 
-        # self.dashborad.canvas2.draw()
-        # print("draw succ3")
 
     def snv(self):
         # print("get snv")
@@ -998,23 +976,6 @@ class MyApp(QMainWindow):
         
         snv_data= (x - meand) / stdd
         
-        # graph.clear()         
-        # ax = graph.add_subplot(121)
-        # for i in range (x.shape[0]):  
-        #     ax.plot(wave.tolist(),x[i].tolist())
-        # ax.set_xlabel('wavelenght, nm')
-        # ax.set_ylabel('log 1/R')
-        # ax.set_xlim(np.min(wave),np.max(wave))
-        
-        # ax2 = graph.add_subplot(122)
-        # for i in range (x.shape[0]):  
-        #     ax2.plot(wave,snv_data[i])
-        # ax2.set_xlabel('wavelenght, nm')
-        # ax2.set_ylabel('Log 1/R')
-        # ax2.set_xlim(np.min(wave),np.max(wave))
-
-        # self.dashborad.canvas3.draw()
-        # print("draw succ4")
     
 if __name__ == '__main__':
     app = QApplication(sys.argv)

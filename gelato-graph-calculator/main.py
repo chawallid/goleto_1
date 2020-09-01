@@ -62,7 +62,7 @@ list_tmp5 = []
 for j in range(225):
     list_tmp5.append([0])
 
-global meanC,snv_data,mscval
+global meanC,snv_data,mscval,smooth
 
 global wave,x,s,g,sd1,sd2
 
@@ -91,7 +91,7 @@ class MyApp(QMainWindow):
             self.timer.start()
 
     def recurring_timer(self):
-        global clickStart,wave_1,x,x_1,sd,sd1_1,result1,count_graph
+        global clickStart,wave_1,x,x_1,sd,sd1_1,result1,count_graph,smooth
         global x_coordinates1,list_tmp1
         global x_coordinates2,list_tmp2
         global x_coordinates3,list_tmp3
@@ -202,6 +202,11 @@ class MyApp(QMainWindow):
                             spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
                             result = mscval
                             print("MSC shape :" , result)
+
+                        elif step == "Smoothing Size":
+                            self.smooth_x()
+                            print("smooth_x shape:",smooth.shape)
+                            result = result*(smooth)
                         
 
                     print("B shape :" , B.shape ,"bias :" , int(self.systemconfig.spinBox_4.value()))
@@ -915,69 +920,68 @@ class MyApp(QMainWindow):
         xx = x.shape[0]
         xy = x.shape[1]
         sd1= np.zeros([xx,xy])
-        # print("FirstDev x", x.shape)
-        # print("FirstDev s g :" , s ,g)
         for i in range(int(s + g / 2 + 0.5), int(xy - s - g / 2 + 0.5)):
             sa=np.mean(x[:,int(i - s - g / 2 + 0.5):int(i - g / 2 - 0.5)], axis = 1)
             sc=np.mean(x[:,int(i + g / 2 + 0.5):int(i + g / 2 - 0.5 + s)], axis = 1)
             sd1[:,i]=sc - sa
 
     def SecondDev(self):
-        global wave,x,s,g,sd2
-        # global graph
+        global x,s,g,sd2
         xx = x.shape[0]
         xy = x.shape[1]
         sd2= np.zeros([xx,xy])
 
-        # print("SecondDev x", x)
         for i in range(int(np.dot(3 / 2,s) + g + 0.5),int(xy - np.dot(3 / 2,s) - g + 0.5)):
             x_c=np.mean(x[:,int(i + s / 2 + g + 0.5):int(i +  np.dot(3 / 2,s) + g - 0.5)],axis = 1)
             x_a=np.mean(x[:,int(i - np.dot(3 / 2,s) - g + 0.5):int(i - s / 2 - g - 0.5)],axis = 1)
             x_b=np.mean(x[:,int(i - s / 2 + 0.5):int(i + s / 2 - 0.5)],axis = 1)
             sd2[:,i]=(x_c) - np.dot(2,(x_b)) + (x_a)
 
-
-    def meancen2(self):
-        global wave,x,s,g,meanC
-        # global graph
+    def smooth_x(self):
+        global x,s,g,smooth
         xx = x.shape[0]
         xy = x.shape[1]
-        mean_x=np.sum(x,axis =0)
-        mean_x=mean_x / xx
-        meand=np.tile(mean_x,(xx,1))
-        meanC=(x - meand)
+        smooth = np.zeros([xx, xy])
+        for i in range(s+1, xy-s):
+            sa = np.mean(x[:, int(i - s):int(i + s)], axis=1)
+            smooth[:, i] = sa
 
-        graph.clear() 
+    # def meancen2(self):
+    #     global wave,x,s,g,meanC
+    #     # global graph
+    #     xx = x.shape[0]
+    #     xy = x.shape[1]
+    #     mean_x=np.sum(x,axis =0)
+    #     mean_x=mean_x / xx
+    #     meand=np.tile(mean_x,(xx,1))
+    #     meanC=(x - meand)
 
-        ax = graph.add_subplot(121)
-        for i in range (x.shape[0]):  
-            ax.plot(wave.tolist(),x[i].tolist())
-        ax.set_xlabel('wavelenght, nm')
-        ax.set_ylabel('log 1/R')
-        ax.set_xlim(np.min(wave),np.max(wave))
+    #     graph.clear() 
+
+    #     ax = graph.add_subplot(121)
+    #     for i in range (x.shape[0]):  
+    #         ax.plot(wave.tolist(),x[i].tolist())
+    #     ax.set_xlabel('wavelenght, nm')
+    #     ax.set_ylabel('log 1/R')
+    #     ax.set_xlim(np.min(wave),np.max(wave))
         
-        ax2 = graph.add_subplot(122)
-        for i in range (x.shape[0]):  
-            ax2.plot(wave,meanC[i])
-        ax2.set_xlabel('wavelenght, nm')
-        ax2.set_ylabel('Log 1/R')
-        ax2.set_xlim(np.min(wave),np.max(wave))
-
+    #     ax2 = graph.add_subplot(122)
+    #     for i in range (x.shape[0]):  
+    #         ax2.plot(wave,meanC[i])
+    #     ax2.set_xlabel('wavelenght, nm')
+    #     ax2.set_ylabel('Log 1/R')
+    #     ax2.set_xlim(np.min(wave),np.max(wave))
 
     def snv(self):
-        # print("get snv")
-        global wave,x,s,g,snv_data
-        # global graph
+        global x,s,g,snv_data
         xx = x.shape[0]
         xy = x.shape[1]
         mean_x=np.mean(x,axis =1)
         std_d=np.std(x,axis=1)
         meand=np.tile(mean_x,(xy,1)).T
         stdd=np.tile(std_d,(xy,1)).T
-        
-        snv_data= (x - meand) / stdd
-        
-    
+        snv_data= (x - meand)/stdd
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myapp = MyApp()

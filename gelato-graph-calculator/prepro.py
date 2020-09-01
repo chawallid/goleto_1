@@ -440,6 +440,8 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox.addItem("")
                 self.comboBox.addItem("")
                 self.comboBox.addItem("")
+                self.comboBox.addItem("")
+
                 self.comboBox.setStyleSheet("\n""background-color: rgb(255, 255, 255);\n"
         "border:none;\n align: \"center\";\n""font-size: 10pt;\n")
 
@@ -455,6 +457,8 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox2.addItem("")
                 self.comboBox2.addItem("")
                 self.comboBox2.addItem("")
+                self.comboBox2.addItem("")
+
                 self.comboBox2.setStyleSheet("\n""background-color: rgb(255, 255, 255);\n"
         "border:none;\n align: \"center\";\n""font-size: 10pt;\n")
 
@@ -471,6 +475,8 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox3.addItem("")
                 self.comboBox3.addItem("")
                 self.comboBox3.addItem("")
+                self.comboBox3.addItem("")
+
                 self.comboBox3.setStyleSheet("\n""background-color: rgb(255, 255, 255);\n"
         "border:none;\n align: \"center\";\n""font-size: 10pt;\n")
 
@@ -609,6 +615,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox.setItemText(3, "MSC")
                 self.comboBox.setItemText(4, "1st Derivative")
                 self.comboBox.setItemText(5,"2nd Derivative")
+                self.comboBox.setItemText(6,"Smoothing Size")
                 self.label_step2.setText("Step 2")
                 self.comboBox2.setItemText(0,"---select---")
                 self.comboBox2.setItemText(1,"RAW")
@@ -616,6 +623,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox2.setItemText(3,"MSC")
                 self.comboBox2.setItemText(4,"1st Derivative")
                 self.comboBox2.setItemText(5,"2nd Derivative")
+                self.comboBox2.setItemText(6,"Smoothing Size")
 
                 self.label_step3.setText("Step 3")
                 self.comboBox3.setItemText(0,"---select---")
@@ -624,6 +632,8 @@ class  Ui_MainWindow(QMainWindow):
                 self.comboBox3.setItemText(3, "MSC")
                 self.comboBox3.setItemText(4,"1st Derivative")
                 self.comboBox3.setItemText(5,"2nd Derivative")
+                self.comboBox3.setItemText(6,"Smoothing Size")
+
 
                 self.Label_Wave.setText("Username")
                 self.widget_name.setText("Type your name...")

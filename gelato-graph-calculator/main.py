@@ -117,29 +117,28 @@ class MyApp(QMainWindow):
         if(clickStart):
 
             if(file_1 != ""):
-                if(count_graph < int(x_1.shape[0])):
-                    print("file_1")
-                    f = open(file_spec[count_graph], "r")
-                    line = 0
-                    X = []
-                    for x in f:
-                        if(line >= 8):
-                            if(x == "\n"):
-                                continue;
-                            tmp = x.split(";")
-                            X.append([float(tmp[4])])
-                        line+=1
-                    f.close()
-
+                print("file_1")
+                f = open(file_spec[count_graph], "r")
+                line = 0
+                X = []
+                for x in f:
+                    if(line >= 8):
+                        if(x == "\n"):
+                            continue;
+                        tmp = x.split(";")
+                        X.append([float(tmp[4])])
+                    line+=1
+                f.close()
+                if(count_graph < len(X)):
                     B = x_1
-                    x = x_1
+                    # x = x_1
                     X = np.array(X)
                     steps = [self.prepro.comboBox.currentText(),self.prepro.comboBox2.currentText(),self.prepro.comboBox3.currentText()]
                     print("steps :",steps)
-                    print("Data from file calibrate :",B[count_graph].shape)
-                    print("Data from specific folder :",X.transpose().shape)
-                    result = X.transpose().dot(B[count_graph])
-                    print("X.dot(B[",count_graph,"]) :",result)
+                    print("Data from file calibrate :",B.shape)
+                    print("Data from specific folder :",X.shape)
+                    result = X.dot(B)
+                    print("X[",count_graph,"].dot(B) :",result.shape)
                     for step in steps :
                         if step == "1st Derivative":
                             s = s_1
@@ -158,9 +157,9 @@ class MyApp(QMainWindow):
                             result = result*(sd2)
                             
                         elif step == "RAW":
-                            print("RAW shape :" , B[count_graph].transpose().shape)
+                            print("RAW shape :" , B.transpose().shape)
                             # print("RAW data :" , x.transpose())
-                            result = result*(B[count_graph].transpose())
+                            result = result*(B.transpose())
                             
                         elif step == "SNV":
                             self.snv()
@@ -205,12 +204,12 @@ class MyApp(QMainWindow):
                             print("MSC shape :" , result)
                         
 
-                    print("B[0] shape :" , B[count_graph].shape ,"bias :" , int(self.systemconfig.spinBox_4.value()))
+                    print("B shape :" , B.shape ,"bias :" , int(self.systemconfig.spinBox_4.value()))
                     print("before cal result :", result.shape)  
-                    result = (result*(B[count_graph])) + int(self.systemconfig.spinBox_4.value())
+                    result = (result*(B)) + int(self.systemconfig.spinBox_4.value())
                     print("after cal result  :", result.shape)              
                     # print("result :", result)
-                    result1 = result
+                    result1 = result[0]
                     # print(result[0][0])
                     # print(np.prod(result[1].shape))
                     self.dashborad.result1.setText(str(result))
@@ -373,7 +372,7 @@ class MyApp(QMainWindow):
     def getbtn1(self):
         print()
         global file_1
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.csv)")
         imagePath = fname[0]
         file_1 = fname[0]
         file_tmp = imagePath.split("/")
@@ -381,7 +380,7 @@ class MyApp(QMainWindow):
 
     def getbtn2(self):
         global file_2
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.csv)")
         imagePath = fname[0]
         file_2 = fname[0]
         file_tmp = imagePath.split("/")
@@ -389,7 +388,7 @@ class MyApp(QMainWindow):
 
     def getbtn3(self):
         global file_3
-        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.csv)")
         imagePath = fname[0]
         file_3 = fname[0]
         file_tmp = imagePath.split("/")
@@ -397,7 +396,7 @@ class MyApp(QMainWindow):
 
     def getbtn4(self):
         global file_4
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.csv)")
         imagePath = fname[0]
         file_4 = fname[0]
         file_tmp = imagePath.split("/")
@@ -405,7 +404,7 @@ class MyApp(QMainWindow):
 
     def getbtn5(self):
         global file_5
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.xlsx)")
+        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file','c:/', "files (*.csv)")
         imagePath = fname[0]
         file_5 = fname[0]
         file_tmp = imagePath.split("/")
@@ -493,10 +492,12 @@ class MyApp(QMainWindow):
 
         if(file_1 != ""):
             print(file_1)
-            X = pd.read_excel(file_1, sheet_name='X', header = None)
-            wl = pd.read_excel(file_1, sheet_name='wl', header = None)
-            wave_1 = np.array(wl).reshape(-1)
+            X = pd.read_csv(file_1, header = None)
+            # print(X)
+            # wl = pd.read_excel(file_1, sheet_name='wl', header = None)
+            # wave_1 = np.array(0).reshape(-1)
             x_1 = np.array(X)
+            # print(x_1)
             # x = x_1
 
         if(file_2 != ""):

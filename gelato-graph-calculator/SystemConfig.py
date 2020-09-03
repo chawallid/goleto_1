@@ -493,7 +493,7 @@ class  Ui_MainWindow(QMainWindow):
                 sub_groupBox_Spec_Upload  = QGridLayout(self.groupBox_Spec_Upload)
                 self.Label_Upload= QtWidgets.QLabel(self.groupBox_Spec_Upload)
                 self.Label_Upload.setStyleSheet("color:black;\n"
-                "border: none;\n" "font-size:14pt bold;\n")
+                "border: none;\n" "font-size:10pt bold;\n")
 
                 self.Label_Upload.setObjectName("Label_Upload")
 

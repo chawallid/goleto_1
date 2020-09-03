@@ -508,7 +508,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.btn_Upload = QtWidgets.QPushButton(self.widget_Upload)
                 self.btn_Upload.setStyleSheet("border-radius:50px;\n"
         "background-color:rgb(255, 255, 255);\n"
-        "font-size:28px;\n"
+        "font-size:14px;\n"
         "color:#000;")
 
                 self.btn_Upload.setObjectName("btn_Upload")

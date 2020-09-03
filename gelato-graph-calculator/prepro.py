@@ -497,7 +497,8 @@ class  Ui_MainWindow(QMainWindow):
                 self.Export.setText("Export")
                 sub_groupBox_Spec_integration.addWidget(self.Label_STEP,0,0)
                 sub_groupBox_Spec_integration.addWidget(self.widget_6,1,0)
-                sub_groupBox_Spec_integration.addWidget(self.Export,2,0)
+                sub_groupBox_Spec_integration.addWidget(QtWidgets.QLabel(""),2,0)
+                sub_groupBox_Spec_integration.addWidget(self.Export,3,0)
 
 
 

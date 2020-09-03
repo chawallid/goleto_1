@@ -4,6 +4,8 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+
 import numpy as np
 import pandas as pd
 
@@ -154,41 +156,26 @@ class MyApp(QMainWindow):
                         elif step == "SNV":
                             self.snv()
                             result = result*(snv_data.transpose())
-                        # elif step == "MSC":
-                        #     sp = x
-                        #     nos = x.shape[0]
-                        #     wave = x.shape[1]
-                        #     meansp=np.mean(sp,axis=0)
-                        #     lbd=np.array(range(0,wave))
-                        #     Ym=np.polyfit(lbd,meansp,1)
-                        #     slopem=Ym[0]
-                        #     interm=Ym[1]
-                        #     Y=np.zeros([nos,2])
-                        #     for i in range(0,nos):
-                        #         Y[i,:]=np.polyfit(lbd,sp[i,:],1)
-                        #     slope=np.tile(Y[:,0],(wave,1)).T
-                        #     inter=np.tile(Y[:,1],(wave,1)).T
-                        #     spmsc=(sp - inter) / slope
-                        #     spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
-                            
-                        #     nos = x.shape[0]
-                        #     wave = x.shape[1]
-                        #     meansp=np.mean(sp,axis=0)
-                        #     lbd=np.array(range(0,wave))
-                            
-                        #     Ym=np.polyfit(lbd,meansp,1)
-                        #     mscval=np.copy(Ym)
-                        #     slopem=Ym[0]
-                        #     interm=Ym[1]
-                        #     Y=np.zeros([nos,2])
-                        #     for i in range(0,nos):
-                        #         Y[i,:]=np.polyfit(lbd,sp[i,:],1)
-                        #     slope=np.tile(Y[:,0],(wave,1)).T
-                        #     inter=np.tile(Y[:,1],(wave,1)).T
-                        #     spmsc=(sp - inter) / slope
-                        #     spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
-                        #     result = mscval
-                        #     print("MSC shape :" , result)
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            # result = spmsc
+                            result = result*(spmsc.transpose())
+                            # print("MSC shape :" , result.shape)
+
                         elif step == "Smoothing Size":
                             s = s_3
                             g = g_3
@@ -197,16 +184,20 @@ class MyApp(QMainWindow):
                         
                     result = (B.dot(result)) + int(self.systemconfig.spinBox_4.value())
                     print("cal result  :", result)              
-                    result1 = result[0]
-                    self.dashborad.result1.setText(str(result1))
+                    result1 = result[0][0]
+                    self.dashborad.result1.setText(str(int(result1)))
                     self.dashborad.figure.clear()
                     ax2 = self.dashborad.figure.add_subplot(111)
-                    x_coordinates1.append(count_graph)
+                    x_coordinates1.append(now.strftime('%H:%M:%S'))
                     list_tmp1.append(result1)
                     ax2.plot(x_coordinates1, list_tmp1)
 
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
+                    gs = gridspec.GridSpec(3,1)
+                    ax2.set_position(gs[0:2].get_position(self.dashborad.figure))
+                    ax2.set_subplotspec(gs[0:2])   
+                    ax2.set_xticklabels(x_coordinates1, rotation=90 , fontsize=8 )
                     self.dashborad.canvas.draw()
                     print("draw 1 succ !!")
 
@@ -235,7 +226,24 @@ class MyApp(QMainWindow):
                         elif step == "SNV":
                             self.snv()
                             result = result*(snv_data.transpose())
-
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            # result = spmsc
+                            result = result*(spmsc.transpose())
                         elif step == "Smoothing Size":
                             s = s_3
                             g = g_3
@@ -245,14 +253,19 @@ class MyApp(QMainWindow):
                     result = (B.dot(result)) + int(self.systemconfig.spinBox_5.value())
                     self.dashborad.figure1.clear()
                     ax2 = self.dashborad.figure1.add_subplot(111)
-                    result2 = result[0]
-                    self.dashborad.result2.setText(str(result2))
+                    result2 = result[0][0]
+                    self.dashborad.result2.setText(str(int(result2)))
 
                     list_tmp2.append(result2)
-                    x_coordinates2.append(count_graph)
+                    x_coordinates2.append(now.strftime('%H:%M:%S'))
                     ax2.plot(x_coordinates2, list_tmp2)
+
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
+                    gs = gridspec.GridSpec(3,1)
+                    ax2.set_position(gs[0:2].get_position(self.dashborad.figure1))
+                    ax2.set_subplotspec(gs[0:2])   
+                    ax2.set_xticklabels(x_coordinates2, rotation=90 , fontsize=8 )
                     self.dashborad.canvas1.draw()
                     print("draw 2 succ !!")
 
@@ -280,6 +293,23 @@ class MyApp(QMainWindow):
                         elif step == "SNV":
                             self.snv()
                             result = result*(snv_data.transpose())
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            result = result*(spmsc.transpose())
 
                         elif step == "Smoothing Size":
                             s = s_3
@@ -289,14 +319,18 @@ class MyApp(QMainWindow):
                     result = (B.dot(result)) + int(self.systemconfig.spinBox_6.value())
                     self.dashborad.figure2.clear()
                     ax2 = self.dashborad.figure2.add_subplot(111)
-                    result3 = result[0]
-                    self.dashborad.result3.setText(str(result3))
+                    result3 = result[0][0]
+                    self.dashborad.result3.setText(str(int(result3)))
 
                     list_tmp3.append(result3)
-                    x_coordinates3.append(count_graph)
+                    x_coordinates3.append(now.strftime('%H:%M:%S'))
                     ax2.plot(x_coordinates3, list_tmp3)
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
+                    gs = gridspec.GridSpec(3,1)
+                    ax2.set_position(gs[0:2].get_position(self.dashborad.figure2))
+                    ax2.set_subplotspec(gs[0:2])   
+                    ax2.set_xticklabels(x_coordinates3, rotation=90 , fontsize=8 )
                     self.dashborad.canvas2.draw()
                     print("draw 3 succ !!") 
 
@@ -323,6 +357,25 @@ class MyApp(QMainWindow):
                         elif step == "SNV":
                             self.snv()
                             result = result*(snv_data.transpose())
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            # result = spmsc
+                            result = result*(spmsc.transpose())
+
                         elif step == "Smoothing Size":
                             s = s_3
                             g = g_3
@@ -331,15 +384,20 @@ class MyApp(QMainWindow):
                     result = (B.dot(result)) + int(self.systemconfig.spinBox_7.value())
                     self.dashborad.figure3.clear()
                     ax2 = self.dashborad.figure3.add_subplot(111)
-                    result4 = result[0]
-                    self.dashborad.result4.setText(str(result4))
+                    result4 = result[0][0]
+                    self.dashborad.result4.setText(str(int(result4)))
 
                     list_tmp4.append(result4)
-                    x_coordinates4.append(count_graph)
+                    x_coordinates4.append(now.strftime('%H:%M:%S'))
 
                     ax2.plot(x_coordinates4, list_tmp4)
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
+
+                    gs = gridspec.GridSpec(3,1)
+                    ax2.set_position(gs[0:2].get_position(self.dashborad.figure3))
+                    ax2.set_subplotspec(gs[0:2])   
+                    ax2.set_xticklabels(x_coordinates4, rotation=90 , fontsize=8 )
                     self.dashborad.canvas3.draw()
                     print("draw 4 succ !!")
                 if(file_5 != ""):
@@ -367,6 +425,25 @@ class MyApp(QMainWindow):
                             self.snv()
                             result = result*(snv_data.transpose())
 
+                        elif step == "MSC":
+                            sp = x
+                            nos = x.shape[0]
+                            wave = x.shape[1]
+                            meansp=np.mean(sp,axis=0)
+                            lbd=np.array(range(0,wave))
+                            Ym=np.polyfit(lbd,meansp,1)
+                            slopem=Ym[0]
+                            interm=Ym[1]
+                            Y=np.zeros([nos,2])
+                            for i in range(0,nos):
+                                Y[i,:]=np.polyfit(lbd,sp[i,:],1)
+                            slope=np.tile(Y[:,0],(wave,1)).T
+                            inter=np.tile(Y[:,1],(wave,1)).T
+                            spmsc=(sp - inter) / slope
+                            spmsc=np.multiply(spmsc,slopem) + np.tile(interm,(nos,wave))
+                            # result = spmsc
+                            result = result*(spmsc.transpose())
+
                         elif step == "Smoothing Size":
                             s = s_3
                             g = g_3
@@ -376,14 +453,18 @@ class MyApp(QMainWindow):
 
                     self.dashborad.figure4.clear()
                     ax2 = self.dashborad.figure4.add_subplot(111)
-                    x_coordinates5.append(count_graph)
-                    result5 = result[0]
-                    self.dashborad.result5.setText(str(result5))
+                    x_coordinates5.append(now.strftime('%H:%M:%S'))
+                    result5 = result[0][0]
+                    self.dashborad.result5.setText(str(int(result5)))
 
                     list_tmp5.append(result5)
                     ax2.plot(x_coordinates5, list_tmp5)
                     ax2.set_xlabel('wavelenght, nm')
                     ax2.set_ylabel('log 1/R')
+                    gs = gridspec.GridSpec(3,1)
+                    ax2.set_position(gs[0:2].get_position(self.dashborad.figure4))
+                    ax2.set_subplotspec(gs[0:2])   
+                    ax2.set_xticklabels(x_coordinates5, rotation=90 , fontsize=8 )
                     self.dashborad.canvas4.draw()
                     print("draw 5 succ !!")
 

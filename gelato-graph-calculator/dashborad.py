@@ -243,19 +243,19 @@ class  Ui_MainWindow(QMainWindow):
         "font: 12pt \"Tahoma\";\n"
         "")
                 self.tabWidget.setObjectName("tabWidget")
-                self.figure = plt.figure(figsize=(4,3))
+                self.figure = plt.figure(figsize=(4,2))
                 self.canvas = FigureCanvas(self.figure)
 
-                self.figure1 = plt.figure(figsize=(4,3))
+                self.figure1 = plt.figure(figsize=(4,2))
                 self.canvas1 = FigureCanvas(self.figure1)
 
-                self.figure2 = plt.figure(figsize=(4,3))
+                self.figure2 = plt.figure(figsize=(4,2))
                 self.canvas2 = FigureCanvas(self.figure2)
                 
-                self.figure3 = plt.figure(figsize=(4,3))
+                self.figure3 = plt.figure(figsize=(4,2))
                 self.canvas3 = FigureCanvas(self.figure3)
 
-                self.figure4 = plt.figure(figsize=(4,3))
+                self.figure4 = plt.figure(figsize=(4,2))
                 self.canvas4 = FigureCanvas(self.figure4)
 
                 self.tabWidget.addTab(self.canvas, "")

@@ -226,6 +226,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.spinBox_7 = QtWidgets.QSpinBox(self.widget_30) #grab_1
                 self.spinBox_7.setObjectName("spinBox_7")
                 sub_GridCal_4_1.addWidget(self.spinBox_7, 0,0)
+                self.spinBox_7.setMaximum(1000000)
 
                 self.Seg_1st = QtWidgets.QLabel(self.widget_28)
                 self.Seg_1st.setGeometry(QtCore.QRect(3, 5, 100, 20)) #grab_1
@@ -244,9 +245,9 @@ class  Ui_MainWindow(QMainWindow):
 
                 sub_GridCal_4_2 = QGridLayout(self.Seg_1st_W)
                 self.spinBox_Seg_1st = QtWidgets.QSpinBox(self.widget_30) #spinBox_Seg_1st
-                self.spinBox_Seg_1st .setObjectName("spinBox_Seg_1st ")
+                self.spinBox_Seg_1st.setObjectName("spinBox_Seg_1st ")
                 sub_GridCal_4_2.addWidget(self.spinBox_Seg_1st , 0,0)
-
+                self.spinBox_Seg_1st.setMaximum(1000000)
 
 
                 self.widget_35 = QtWidgets.QWidget(self.groupBox_cal)#2
@@ -300,6 +301,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.spinBox_8 = QtWidgets.QSpinBox(self.widget_41)#grab2
                 self.spinBox_8.setObjectName("spinBox_8")
                 sub_GridCal_5_1.addWidget(self.spinBox_8, 0,0)
+                self.spinBox_8.setMaximum(1000000)
 
                 self.Seg_2nd = QtWidgets.QLabel(self.widget_35)
                 self.Seg_2nd.setStyleSheet("background-color: rgb(236, 236, 236);\n"
@@ -319,6 +321,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.spinBox_Seg_2nd = QtWidgets.QSpinBox(self.Seg_2nd_W)#Seg_2nd_W
                 self.spinBox_Seg_2nd.setObjectName("spinBox_Seg_2nd")
                 sub_GridCal_5_2.addWidget(self.spinBox_Seg_2nd, 0,0)
+                self.spinBox_Seg_2nd.setMaximum(1000000)
 
                 self.Smoothing = QtWidgets.QWidget(self.groupBox_cal)#Smoothing
                 self.Smoothing.setStyleSheet("background-color:rgb(158, 158, 158);\n"
@@ -372,6 +375,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.spinBox_grab_Smoothing_w = QtWidgets.QSpinBox(self.grab_Smoothing_w)#grab2
                 self.spinBox_grab_Smoothing_w.setObjectName("grab_Smoothing_w")
                 sub_GridCal_6_1.addWidget(self.spinBox_grab_Smoothing_w, 0,0)
+                self.spinBox_grab_Smoothing_w.setMaximum(1000000)
 
                 self.Seg_Smoothing = QtWidgets.QLabel(self.Smoothing)
                 self.Seg_Smoothing.setStyleSheet("background-color: rgb(236, 236, 236);\n"
@@ -391,7 +395,7 @@ class  Ui_MainWindow(QMainWindow):
                 self.spinBox_Seg_Smoothing = QtWidgets.QSpinBox(self.Seg_Smoothing_W)#Seg_Smoothing
                 self.spinBox_Seg_Smoothing.setObjectName("spinBox_Seg_Smoothing")
                 sub_GridCal_6_2.addWidget(self.spinBox_Seg_Smoothing, 0,0)
-
+                self.spinBox_Seg_Smoothing.setMaximum(1000000)
 
                 sub_groupbox_cal.addWidget(self.Label , 0 , 0 , 1 , 6)
                 sub_groupbox_cal.addWidget(self.widget_4 , 1 , 1 , 1 , 4)

@@ -688,9 +688,12 @@ class MyApp(QMainWindow):
         xx = x.shape[0]
         xy = x.shape[1]
         mean_x=np.mean(x,axis =1)
+        print("mean_x",mean_x)
         std_d=np.std(x,axis=1)
+        print("std_d",std_d)
         meand=np.tile(mean_x,(xy,1)).T
         stdd=np.tile(std_d,(xy,1)).T
+        print("meand,stdd",meand,stdd)
         snv_data= (x - meand)/stdd
 
 if __name__ == '__main__':

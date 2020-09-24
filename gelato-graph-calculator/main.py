@@ -9,7 +9,6 @@ import matplotlib.gridspec as gridspec
 import numpy as np
 import pandas as pd
 
-from fpdf import FPDF
 import os,glob
 
 from PyQt5.QtWidgets import QMainWindow , QScrollArea,QApplication , QWidget , QVBoxLayout, QPushButton, QGroupBox, QGridLayout
@@ -41,6 +40,7 @@ result3 = []
 result4 = []
 result5 = []
 file_spec = []
+myPath = ""
 date_arr = []
 count_graph = 0
 x_coordinates1 = []
@@ -106,7 +106,7 @@ class MyApp(QMainWindow):
         global x_3,s_3,g_3,sd1_3,sd2_3
         global x_4,s_4,g_4,sd1_4,sd2_4
         global x_5,s_5,g_5,sd1_5,sd2_5
-        global file_spec
+        global file_spec,myPath
         now = datetime.now()
         # date_arr.append(now)
 
@@ -118,9 +118,17 @@ class MyApp(QMainWindow):
         self.dashborad.tabWidget.setTabText(3, self.dashborad.label_result4.text())
         self.dashborad.tabWidget.setTabText(4, self.dashborad.label_result5.text())
         if(clickStart):
-            if(count_graph < len(file_spec)):
+            if(myPath != ""):
+                file_spec = []
+                files = glob.glob(os.path.join(myPath, '*.txt'))
+                files.sort(key=os.path.getmtime)
+                for txtfile in files:
+                    file_spec.append(txtfile)
+                
+                print(file_spec[len(file_spec)-1])
+
                 if(len(file_spec) > 0):
-                    f = open(file_spec[count_graph], "r")
+                    f = open(file_spec[len(file_spec)-1], "r")
                     print(f)
                     line = 0
                     X = []
@@ -132,6 +140,7 @@ class MyApp(QMainWindow):
                             X.append([float(tmp[4])])
                         line+=1
                     f.close()
+
                 if(file_1 != ""):
                     print("file_1")
                     B = x_1
@@ -509,12 +518,10 @@ class MyApp(QMainWindow):
 
         self.prepro.Export.clicked.connect(self.getTxt)
     def specific(self):
-        global file_spec
+        global file_spec,myPath
         myPath = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory"))
-        file_spec = []
-        for txtfile in glob.glob(os.path.join(myPath, '*.txt')):
-            file_spec.append(txtfile)
-        print("specific path:",myPath,",numbers :",len(file_spec))
+
+        print("specific path:",myPath)
         self.systemconfig.Label_Upload.setText(str(myPath))
 
     def getPrepair(self):

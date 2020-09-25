@@ -124,7 +124,7 @@ class MyApp(QMainWindow):
                     files.sort(key=os.path.getmtime)
                     for txtfile in files:
                         file_spec.append(txtfile)
-                    print(file_spec[len(file_spec)-1])
+                    clickStart = True
                 else:
                     clickStart = False
         if(clickStart):

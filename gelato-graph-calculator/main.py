@@ -117,16 +117,18 @@ class MyApp(QMainWindow):
         self.dashborad.tabWidget.setTabText(2, self.dashborad.label_result3.text())
         self.dashborad.tabWidget.setTabText(3, self.dashborad.label_result4.text())
         self.dashborad.tabWidget.setTabText(4, self.dashborad.label_result5.text())
-        if(clickStart):
-            if(myPath != ""):
+        if(myPath != ""):
                 file_spec = []
                 files = glob.glob(os.path.join(myPath, '*.txt'))
-                files.sort(key=os.path.getmtime)
-                for txtfile in files:
-                    file_spec.append(txtfile)
-                
-                print(file_spec[len(file_spec)-1])
-
+                if(len(files) > 0 ):
+                    files.sort(key=os.path.getmtime)
+                    for txtfile in files:
+                        file_spec.append(txtfile)
+                    print(file_spec[len(file_spec)-1])
+                else:
+                    clickStart = False
+        if(clickStart):
+            if(myPath != ""):
                 if(len(file_spec) > 0):
                     f = open(file_spec[len(file_spec)-1], "r")
                     print(f)

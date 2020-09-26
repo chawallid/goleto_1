@@ -117,6 +117,7 @@ class MyApp(QMainWindow):
         self.dashborad.tabWidget.setTabText(2, self.dashborad.label_result3.text())
         self.dashborad.tabWidget.setTabText(3, self.dashborad.label_result4.text())
         self.dashborad.tabWidget.setTabText(4, self.dashborad.label_result5.text())
+        Find_file = False
         if(myPath != ""):
                 file_spec = []
                 files = glob.glob(os.path.join(myPath, '*.txt'))
@@ -124,10 +125,10 @@ class MyApp(QMainWindow):
                     files.sort(key=os.path.getmtime)
                     for txtfile in files:
                         file_spec.append(txtfile)
-                    clickStart = True
+                    Find_file = True
                 else:
-                    clickStart = False
-        if(clickStart):
+                    Find_file = False
+        if(clickStart == True and Find_file == True):
             if(myPath != ""):
                 if(len(file_spec) > 0):
                     f = open(file_spec[len(file_spec)-1], "r")
